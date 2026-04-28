@@ -242,97 +242,106 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
 @media(max-width:768px){
   /* Nav */
   .nav-links{display:none}
-
+  
   /* Hero */
-  .hero{padding:100px 5% 60px}
-  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero{padding:90px 5% 60px}
+  .hero-inner{grid-template-columns:1fr!important;gap:40px;text-align:center}
   .hero-actions,.hero-trust{justify-content:center}
   .dash-wrap{order:-1}
   .badge-float{display:none}
   .dash{width:100%}
-  h1{font-size:2.4rem;letter-spacing:-1px}
-  .hero-desc{font-size:0.95rem}
-
+  h1{font-size:2.2rem;letter-spacing:-0.5px}
+  .hero-desc{font-size:0.92rem;margin-left:auto;margin-right:auto}
+  
+  /* Section headings */
+  .section-h{font-size:1.7rem!important;letter-spacing:-0.5px!important}
+  
+  /* Sections padding */
+  .usp,.features,.plans,.quote-section,.cta-section{padding:60px 5%}
+  section[style*="padding:100px"]{padding-top:60px!important;padding-bottom:60px!important;padding-left:5%!important;padding-right:5%!important}
+  section[style*="padding:80px"]{padding-top:50px!important;padding-bottom:50px!important;padding-left:5%!important;padding-right:5%!important}
+  
+  /* USP grid */
+  .usp-grid{grid-template-columns:1fr!important;gap:0!important}
+  .usp-card{border-radius:0!important}
+  .usp-card:first-child{border-radius:16px 16px 0 0!important}
+  .usp-card:last-child{border-radius:0 0 16px 16px!important}
+  
+  /* Feature rows */
+  .feat-row{grid-template-columns:1fr!important;gap:36px!important;margin-bottom:60px!important}
+  .feat-row.rev{direction:ltr}
+  .feat-h{font-size:1.4rem!important}
+  
+  /* Plans */
+  .plans-grid{grid-template-columns:1fr!important}
+  .plan-card.hot{order:-1}
+  .plans-toggle{width:100%!important;justify-content:center}
+  
   /* Ticker */
   .ticker{padding:12px 0}
-
-  /* USP */
-  .usp,.features,.plans,.quote-section,.cta-section{padding:60px 5%}
-  .usp-grid{grid-template-columns:1fr;gap:0}
-  .usp-card{border-radius:0}
-  .usp-card:first-child{border-radius:16px 16px 0 0}
-  .usp-card:last-child{border-radius:0 0 16px 16px}
-  .section-h{font-size:1.8rem;letter-spacing:-0.5px}
-
-  /* Features */
-  .feat-row{grid-template-columns:1fr;gap:36px;margin-bottom:60px}
-  .feat-row.rev{direction:ltr}
-  .feat-h{font-size:1.5rem}
-
-  /* Plans */
-  .plans-grid{grid-template-columns:1fr}
-  .plan-card.hot{order:-1}
-
-  /* Footer */
-  .footer-top{grid-template-columns:1fr;gap:32px}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .footer-links{flex-direction:column;gap:24px}
-
-  /* Inline grid sections */
-  .mobile-stack{grid-template-columns:1fr!important;gap:24px!important;border-radius:20px!important}
-  .mobile-hide{display:none!important}
-  .mobile-col{grid-template-columns:1fr!important}
-
-  /* Fix split card borders on mobile */
-  #staff-card{border-radius:20px 20px 0 0!important}
-  #owner-card{border-radius:0 0 20px 20px!important}
-
-  /* General section padding */
-  section{padding-left:5%!important;padding-right:5%!important}
-
-  /* Ticker */
   .tick-item{font-size:0.75rem}
-
-  /* Bottom combined quote */
-  .mobile-col.cq-row{flex-direction:column!important;text-align:center}
-
-  /* Stat bars in feature section */
-  .feat-bar-label{width:60px!important;font-size:0.7rem}
-  .feat-bar-val{width:50px!important;font-size:0.7rem}
-
-  /* Plans toggle */
-  .toggle-btn{padding:8px 18px!important;font-size:0.8rem!important}
-
-  /* CTA buttons */
-  .btn-hero{padding:13px 24px!important;font-size:0.88rem!important}
-  .cta-pills{flex-direction:column;gap:12px}
-
-  /* USP top flex */
-  .usp-inner > div:first-child{flex-direction:column!important;align-items:flex-start!important}
-
-  /* Stats bar */
-  .stats-inner{grid-template-columns:1fr 1fr!important;gap:16px!important;text-align:center}
-  .stat-num{font-size:1.8rem}
-
+  
   /* Footer */
-  .footer-top{grid-template-columns:1fr!important}
-  .footer-links{flex-direction:column!important;gap:24px!important}
-
-  /* Hero trust */
-  .hero-trust{flex-wrap:wrap}
-
-  /* Feature row visual */
-  .feat-visual{padding:20px}
-
-  /* Quote section */
-  blockquote{font-size:1.2rem}
-
-  /* Plan cards */
-  .plan-card{padding:28px 24px}
-
-  /* CTA section */
-  .cta-h{font-size:2rem!important}
-  .cta-section{padding:80px 5%!important}
+  .footer-top{grid-template-columns:1fr!important;gap:28px!important}
+  .footer-bottom{flex-direction:column!important;text-align:center!important;gap:8px!important}
+  
+  /* CTA */
+  .btn-hero{padding:13px 22px!important;font-size:0.88rem!important}
+  .cta-pills{flex-direction:column!important;gap:10px!important}
+  
+  /* ── STAFF vs OWNER SPLIT SECTION ── */
+  /* Stack the 3-col grid vertically, hide arrow divider */
+  .mobile-stack{grid-template-columns:1fr!important;gap:0!important;border-radius:20px!important;max-width:100%!important}
+  .mobile-hide{display:none!important}
+  
+  /* Round corners for stacked staff/owner cards */
+  #staff-card{border-radius:20px 20px 0 0!important;border-right:none!important;border-bottom:1px solid rgba(0,192,107,0.15)!important}
+  #owner-card{border-radius:0 0 20px 20px!important}
+  
+  /* Bottom callout in staff section */
+  .mobile-callout{margin-top:24px!important;padding:24px!important}
+  
+  /* ── DOCTOR SECTION ── */
+  /* 1fr 1.6fr → 1fr */
+  div[style*="grid-template-columns:1fr 1.6fr"]{grid-template-columns:1fr!important;display:flex!important;flex-direction:column!important}
+  div[style*="border-right:1px solid rgba(0,192,107,0.15)"]{border-right:none!important;border-bottom:1px solid rgba(0,192,107,0.15)!important;border-radius:20px 20px 0 0!important}
+  div[style*="grid-template-columns:repeat(3,1fr);gap:12px"]{grid-template-columns:1fr!important}
+  div[style*="grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px"]{grid-template-columns:1fr!important}
+  
+  /* ── TEAM CARDS ── */
+  div[style*="grid-template-columns:1fr 1fr;gap:24px"]{grid-template-columns:1fr!important;gap:16px!important}
+  
+  /* Combined quote row flex */
+  div[style*="display:flex;align-items:center;gap:24px"]{flex-direction:column!important;gap:12px!important;text-align:center!important}
+  
+  /* Inline mini grids inside cards */
+  .mobile-col{grid-template-columns:1fr!important}
+  div[style*="grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px"]{grid-template-columns:1fr!important;gap:8px!important}
+  
+  /* Feature bar labels */
+  .feat-bar-label{width:60px!important;font-size:0.68rem!important}
+  .feat-bar-val{width:48px!important;font-size:0.68rem!important}
+  
+  /* Toggle */
+  .toggle-btn{padding:8px 16px!important;font-size:0.8rem!important}
+  
+  /* General inline padding fix */
+  div[style*="padding:52px 44px"],div[style*="padding:52px 48px"]{padding:32px 24px!important}
+  div[style*="padding:40px 36px"],div[style*="padding:40px"]{padding:28px 20px!important}
+  div[style*="padding:40px 28px"]{padding:22px 18px!important}
+  div[style*="padding:32px 40px"]{padding:24px 20px!important}
+  div[style*="padding:36px 32px"]{padding:28px 20px!important}
+  div[style*="padding:24px 28px"]{padding:18px 16px!important}
+  
+  /* Stats in hero callout */
+  div[style*="grid-template-columns:repeat(3,1fr);gap:8"]{grid-template-columns:1fr!important;gap:8px!important}
+  
+  /* Banner bottom 3-grid */
+  div[style*="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"]{grid-template-columns:1fr!important;gap:12px!important}
+  
+  /* Heading font sizes in inline styles */
+  h3[style*="font-size:1.5rem"]{font-size:1.25rem!important}
+  h3[style*="font-size:2rem"]{font-size:1.6rem!important}
 }
 </style>
 </head>
@@ -554,7 +563,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
     </div>
 
     <!-- BOTTOM CALLOUT -->
-    <div style="margin-top:48px;text-align:center;padding:32px;background:rgba(0,192,107,0.06);border:1px solid rgba(0,192,107,0.15);border-radius:20px;max-width:700px;margin-left:auto;margin-right:auto">
+    <div class="mobile-callout" style="margin-top:48px;text-align:center;padding:32px;background:rgba(0,192,107,0.06);border:1px solid rgba(0,192,107,0.15);border-radius:20px;max-width:700px;margin-left:auto;margin-right:auto">
       <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--white);margin-bottom:10px">Your staff runs the data. <span style="color:var(--green)">You run the business.</span></div>
       <div style="font-size:0.9rem;color:var(--muted);line-height:1.65">No more asking "how much did we make today?" — just open the app and see. No more month-end commission disputes — every rupee is tracked automatically.</div>
     </div>
