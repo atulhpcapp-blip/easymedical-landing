@@ -351,26 +351,37 @@ footer{background:var(--ink);padding:48px 5% 32px;color:#9ca3af}
       <div class="section-label">Pricing</div>
       <div class="section-title">Simple, transparent pricing</div>
       <p style="color:var(--ink-3);font-size:1rem;margin-top:12px">Start free. Upgrade when you're ready.</p>
+
+      <!-- TOGGLE -->
+      <div style="display:inline-flex;align-items:center;gap:0;background:#f3f4f6;border-radius:100px;padding:4px;margin-top:28px">
+        <button id="btn-monthly" onclick="setBilling('monthly')" style="padding:9px 28px;border-radius:100px;border:none;font-size:0.9rem;font-weight:600;cursor:pointer;background:#111;color:#fff;transition:all .2s">Monthly</button>
+        <button id="btn-yearly" onclick="setBilling('yearly')" style="padding:9px 28px;border-radius:100px;border:none;font-size:0.9rem;font-weight:600;cursor:pointer;background:transparent;color:#6b7280;transition:all .2s">Yearly <span style="background:#dcfce7;color:#16a34a;font-size:0.7rem;padding:2px 8px;border-radius:100px;margin-left:4px">Save 20%</span></button>
+      </div>
     </div>
+
     <div class="pricing-grid">
+      <!-- STARTER -->
       <div class="plan">
         <div class="plan-name">Starter</div>
-        <div class="plan-price">Rs 999</div>
-        <div class="plan-period">per month</div>
+        <div class="plan-price" id="price-starter">Rs 999</div>
+        <div class="plan-period" id="period-starter">per month</div>
         <ul class="plan-features">
           <li>Unlimited patients</li>
-          <li>IP & OP management</li>
+          <li>IP &amp; OP management</li>
           <li>Referral commission tracking</li>
-          <li>Daily & monthly reports</li>
+          <li>Daily &amp; monthly reports</li>
           <li>Up to 5 staff accounts</li>
+          <li>30-day free trial</li>
         </ul>
         <a href="https://app.easymedicalsolutions.in" class="plan-btn">Start free trial</a>
       </div>
+
+      <!-- PRO -->
       <div class="plan featured">
         <div class="plan-badge">Most Popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price">Rs 1,999</div>
-        <div class="plan-period">per month</div>
+        <div class="plan-price" id="price-pro">Rs 1,999</div>
+        <div class="plan-period" id="period-pro">per month</div>
         <ul class="plan-features">
           <li>Everything in Starter</li>
           <li>Area-wise reports</li>
@@ -381,10 +392,12 @@ footer{background:var(--ink);padding:48px 5% 32px;color:#9ca3af}
         </ul>
         <a href="https://app.easymedicalsolutions.in" class="plan-btn">Start free trial</a>
       </div>
+
+      <!-- ENTERPRISE -->
       <div class="plan">
         <div class="plan-name">Enterprise</div>
-        <div class="plan-price">Rs 4,999</div>
-        <div class="plan-period">per month</div>
+        <div class="plan-price" id="price-enterprise">Rs 4,999</div>
+        <div class="plan-period" id="period-enterprise">per month</div>
         <ul class="plan-features">
           <li>Everything in Pro</li>
           <li>Multi-hospital management</li>
@@ -395,8 +408,38 @@ footer{background:var(--ink);padding:48px 5% 32px;color:#9ca3af}
         <a href="mailto:support@easymedicalsolutions.in" class="plan-btn">Contact us</a>
       </div>
     </div>
+
+    <div id="yearly-note" style="text-align:center;margin-top:20px;font-size:0.85rem;color:var(--ink-3);display:none">
+      Billed annually &nbsp;·&nbsp; <strong style="color:var(--green)">2 months free</strong> vs monthly billing
+    </div>
   </div>
 </section>
+
+<script>
+const prices={
+  monthly:{starter:'Rs 300',pro:'Rs 400',enterprise:'Rs 600',period:'per month'},
+  yearly:{starter:'Rs 3,000',pro:'Rs 4,000',enterprise:'Rs 6,000',period:'per year (save 2 months)'}
+}
+function setBilling(type){
+  const p=prices[type]
+  document.getElementById('price-starter').textContent=p.starter
+  document.getElementById('price-pro').textContent=p.pro
+  document.getElementById('price-enterprise').textContent=p.enterprise
+  document.getElementById('period-starter').textContent=p.period
+  document.getElementById('period-pro').textContent=p.period
+  document.getElementById('period-enterprise').textContent=p.period
+  document.getElementById('yearly-note').style.display=type==='yearly'?'block':'none'
+  const btnM=document.getElementById('btn-monthly')
+  const btnY=document.getElementById('btn-yearly')
+  if(type==='monthly'){
+    btnM.style.background='#111';btnM.style.color='#fff'
+    btnY.style.background='transparent';btnY.style.color='#6b7280'
+  } else {
+    btnY.style.background='#111';btnY.style.color='#fff'
+    btnM.style.background='transparent';btnM.style.color='#6b7280'
+  }
+}
+</script>
 
 <!-- TESTIMONIAL -->
 <section class="social-proof">
