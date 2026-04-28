@@ -240,14 +240,99 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
 
 /* ── MOBILE ── */
 @media(max-width:768px){
-  .hero-inner,.feat-row,.footer-top{grid-template-columns:1fr;gap:48px}
-  .feat-row.rev{direction:ltr}
-  .usp-grid,.plans-grid{grid-template-columns:1fr}
+  /* Nav */
   .nav-links{display:none}
+
+  /* Hero */
+  .hero{padding:100px 5% 60px}
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-actions,.hero-trust{justify-content:center}
   .dash-wrap{order:-1}
   .badge-float{display:none}
-  .hero-inner{text-align:center}
-  .hero-actions,.hero-trust{justify-content:center}
+  .dash{width:100%}
+  h1{font-size:2.4rem;letter-spacing:-1px}
+  .hero-desc{font-size:0.95rem}
+
+  /* Ticker */
+  .ticker{padding:12px 0}
+
+  /* USP */
+  .usp,.features,.plans,.quote-section,.cta-section{padding:60px 5%}
+  .usp-grid{grid-template-columns:1fr;gap:0}
+  .usp-card{border-radius:0}
+  .usp-card:first-child{border-radius:16px 16px 0 0}
+  .usp-card:last-child{border-radius:0 0 16px 16px}
+  .section-h{font-size:1.8rem;letter-spacing:-0.5px}
+
+  /* Features */
+  .feat-row{grid-template-columns:1fr;gap:36px;margin-bottom:60px}
+  .feat-row.rev{direction:ltr}
+  .feat-h{font-size:1.5rem}
+
+  /* Plans */
+  .plans-grid{grid-template-columns:1fr}
+  .plan-card.hot{order:-1}
+
+  /* Footer */
+  .footer-top{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .footer-links{flex-direction:column;gap:24px}
+
+  /* Inline grid sections */
+  .mobile-stack{grid-template-columns:1fr!important;gap:24px!important;border-radius:20px!important}
+  .mobile-hide{display:none!important}
+  .mobile-col{grid-template-columns:1fr!important}
+
+  /* Fix split card borders on mobile */
+  #staff-card{border-radius:20px 20px 0 0!important}
+  #owner-card{border-radius:0 0 20px 20px!important}
+
+  /* General section padding */
+  section{padding-left:5%!important;padding-right:5%!important}
+
+  /* Ticker */
+  .tick-item{font-size:0.75rem}
+
+  /* Bottom combined quote */
+  .mobile-col.cq-row{flex-direction:column!important;text-align:center}
+
+  /* Stat bars in feature section */
+  .feat-bar-label{width:60px!important;font-size:0.7rem}
+  .feat-bar-val{width:50px!important;font-size:0.7rem}
+
+  /* Plans toggle */
+  .toggle-btn{padding:8px 18px!important;font-size:0.8rem!important}
+
+  /* CTA buttons */
+  .btn-hero{padding:13px 24px!important;font-size:0.88rem!important}
+  .cta-pills{flex-direction:column;gap:12px}
+
+  /* USP top flex */
+  .usp-inner > div:first-child{flex-direction:column!important;align-items:flex-start!important}
+
+  /* Stats bar */
+  .stats-inner{grid-template-columns:1fr 1fr!important;gap:16px!important;text-align:center}
+  .stat-num{font-size:1.8rem}
+
+  /* Footer */
+  .footer-top{grid-template-columns:1fr!important}
+  .footer-links{flex-direction:column!important;gap:24px!important}
+
+  /* Hero trust */
+  .hero-trust{flex-wrap:wrap}
+
+  /* Feature row visual */
+  .feat-visual{padding:20px}
+
+  /* Quote section */
+  blockquote{font-size:1.2rem}
+
+  /* Plan cards */
+  .plan-card{padding:28px 24px}
+
+  /* CTA section */
+  .cta-h{font-size:2rem!important}
+  .cta-section{padding:80px 5%!important}
 }
 </style>
 </head>
@@ -361,7 +446,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
 </div>
 
 <!-- SPLIT ROLES SECTION -->
-<section style="padding:100px 6%;background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%)">
+<section style="padding:100px 6%;background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%)" class="section-wrap">
   <div style="max-width:1280px;margin:0 auto">
     <div style="text-align:center;margin-bottom:64px">
       <div class="section-eyebrow">How it works for your team</div>
@@ -369,10 +454,10 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
       <p style="color:var(--muted);font-size:1rem;margin-top:16px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75">No training needed. No complicated software. Reception enters from their phone. You open reports and see the full picture — anytime, anywhere.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:1000px;margin:0 auto">
+    <div class="mobile-stack" style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:1000px;margin:0 auto">
 
       <!-- STAFF SIDE -->
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:24px 0 0 24px;padding:40px 36px">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:24px 0 0 24px;padding:40px 36px" id="staff-card">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);padding:6px 16px;border-radius:100px;margin-bottom:28px">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#60a5fa" stroke-width="2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg>
           <span style="font-size:0.72rem;font-weight:700;color:#60a5fa;text-transform:uppercase;letter-spacing:.1em">Your Staff / Reception</span>
@@ -418,8 +503,8 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
         </div>
       </div>
 
-      <!-- DIVIDER ARROW -->
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;position:relative">
+      <!-- DIVIDER ARROW mobile-hide -->
+      <div class="mobile-hide" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;position:relative">
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px">
           <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px rgba(0,192,107,0.4);font-size:1.2rem">→</div>
           <div style="font-size:0.6rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap">Auto sync</div>
@@ -428,7 +513,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
       </div>
 
       <!-- OWNER SIDE -->
-      <div style="background:linear-gradient(160deg,rgba(0,192,107,0.08),rgba(0,232,127,0.03));border:1px solid rgba(0,192,107,0.25);border-radius:0 24px 24px 0;padding:40px 36px">
+      <div style="background:linear-gradient(160deg,rgba(0,192,107,0.08),rgba(0,232,127,0.03));border:1px solid rgba(0,192,107,0.25);border-radius:0 24px 24px 0;padding:40px 36px" id="owner-card">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,192,107,0.12);border:1px solid rgba(0,192,107,0.25);padding:6px 16px;border-radius:100px;margin-bottom:28px">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#00c06b" stroke-width="2"/><path d="M2 17l10 5 10-5" stroke="#00c06b" stroke-width="2"/><path d="M2 12l10 5 10-5" stroke="#00c06b" stroke-width="2"/></svg>
           <span style="font-size:0.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.1em">You — The Owner / Doctor</span>
@@ -456,7 +541,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
         <!-- owner report view -->
         <div style="margin-top:32px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,192,107,0.15);border-radius:14px;padding:16px">
           <div style="font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:12px">Owner view — Monthly Report</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div class="mobile-col" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
             <div style="background:rgba(0,192,107,0.08);border-radius:8px;padding:10px"><div style="font-size:0.6rem;color:var(--green);font-weight:700;text-transform:uppercase;margin-bottom:4px">Real income</div><div style="font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--green)">Rs 1.18L</div></div>
             <div style="background:rgba(245,166,35,0.08);border-radius:8px;padding:10px"><div style="font-size:0.6rem;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:4px">Ref comm due</div><div style="font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--gold)">Rs 17,940</div></div>
           </div>
@@ -654,7 +739,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
         </div>
 
         <!-- 3 insight cards -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px">
+        <div class="mobile-col" class="mobile-col" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px">
           <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:18px 16px">
             <div style="font-size:1.5rem;margin-bottom:8px">🏥</div>
             <div style="font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:4px">Real hospital tested</div>
@@ -675,7 +760,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
     </div>
 
     <!-- bottom banner -->
-    <div style="margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    <div class="mobile-col" class="mobile-col" style="margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
       <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:18px;padding:24px 28px;display:flex;align-items:center;gap:16px">
         <div style="font-size:2rem;flex-shrink:0">👨‍⚕️</div>
         <div><div style="font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:4px">Designed by a doctor</div><div style="font-size:0.78rem;color:var(--muted)">Not by an IT company that has never seen a patient register</div></div>
@@ -697,7 +782,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
         <h3 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--white);letter-spacing:-1px">A doctor and a business brain.<br/><span style="color:var(--green);font-style:italic">Built together, for you.</span></h3>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="mobile-col" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
 
         <!-- DR. ATUL RAI -->
         <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(0,192,107,0.2);border-radius:24px;padding:40px;position:relative;overflow:hidden">
@@ -741,7 +826,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
       </div>
 
       <!-- COMBINED QUOTE -->
-      <div style="margin-top:24px;background:linear-gradient(135deg,rgba(0,192,107,0.06),rgba(245,166,35,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 40px;display:flex;align-items:center;gap:24px">
+      <div class="mobile-col" style="margin-top:24px;background:linear-gradient(135deg,rgba(0,192,107,0.06),rgba(245,166,35,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:24px;display:flex;align-items:center;gap:24px">
         <div style="font-family:'Fraunces',serif;font-size:2.5rem;color:rgba(0,192,107,0.3);line-height:1;flex-shrink:0">"</div>
         <div>
           <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--white);line-height:1.5;margin-bottom:8px">A doctor who knows the pain. A business mind who knows the solution. Together, we built the software Indian hospitals have always needed — and never had.</div>
