@@ -876,7 +876,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
     <div class="plans-grid">
       <div class="plan-card">
         <div class="plan-name">Starter</div>
-        <div class="plan-price" id="pp-starter">Rs 300</div>
+        <div class="plan-price" id="pp-starter">Rs 600</div>
         <div class="plan-period" id="pperiod-starter">per month</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -892,7 +892,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
       <div class="plan-card hot">
         <div class="plan-hot-badge">Most Popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price" id="pp-pro">Rs 400</div>
+        <div class="plan-price" id="pp-pro">Rs 900</div>
         <div class="plan-period" id="pperiod-pro">per month</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -907,7 +907,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
       </div>
       <div class="plan-card">
         <div class="plan-name">Enterprise</div>
-        <div class="plan-price" id="pp-enterprise">Rs 600</div>
+        <div class="plan-price" id="pp-enterprise">Rs 1,900</div>
         <div class="plan-period" id="pperiod-enterprise">per month</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -1021,6 +1021,7 @@ footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:60p
 
 <script>
 // Pricing toggle
+document.addEventListener('DOMContentLoaded',()=>setPlan('monthly'))
 const prices={
   monthly:{starter:'Rs 600',pro:'Rs 900',enterprise:'Rs 1,900',period:'per month'},
   yearly:{starter:'Rs 6,000',pro:'Rs 9,000',enterprise:'Rs 19,000',period:'per year'}
