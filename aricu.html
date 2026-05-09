@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARICU by Dr.Atul Rai · Smart ICU Command Center for Indian Hospitals</title>
+<meta name="description" content="Real-time vitals, 78+ evidence-based protocols, 28 clinical scores, Code Blue management. Built by Indian intensivists for Tier-2/3 hospital ICUs. Starting ₹2,999/month.">
+<meta property="og:title" content="ARICU by Dr.Atul Rai · Smart ICU Command Center">
+<meta property="og:description" content="Comprehensive ICU monitoring app for Indian Tier-2/3 hospitals. From ₹2,999/month.">
+<meta property="og:url" content="https://easymedicalsolutions.in/aricu">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0e15; color: white; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .serif { font-family: 'Playfair Display', Georgia, serif; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; text-decoration: none; }
+  
+  /* Navigation */
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(10,14,21,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #1a1f2e; padding: 16px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon { width: 40px; height: 40px; background: #0a3030; border: 1px solid #14b8a6; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #14b8a6; font-size: 22px; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .logo-text { font-size: 18px; font-weight: 700; }
+  .logo-sub { color: #9ca3af; font-size: 12px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { color: #9ca3af; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: white; }
+  .nav-cta { background: #14b8a6; color: #0a0e15 !important; padding: 10px 22px; border-radius: 24px; font-weight: 600; font-size: 14px; transition: transform 0.2s; }
+  .nav-cta:hover { transform: translateY(-1px); }
+  
+  /* Hero */
+  .hero { padding: 100px 0 80px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(20,184,166,0.15) 0%, transparent 60%); pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(20,184,166,0.1); border: 1px solid #14b8a6; color: #14b8a6; padding: 8px 16px; border-radius: 24px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; max-width: 900px; }
+  .hero h1 em { color: #14b8a6; font-style: italic; }
+  .hero p { font-size: 20px; color: #9ca3af; max-width: 700px; margin-bottom: 40px; }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: #14b8a6; color: #0a0e15; padding: 16px 32px; border-radius: 32px; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: white; padding: 16px 32px; border-radius: 32px; font-weight: 600; font-size: 16px; border: 1px solid #1a1f2e; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-secondary:hover { border-color: #14b8a6; }
+  .hero-trust { margin-top: 40px; color: #6b7280; font-size: 14px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-trust .check { color: #14b8a6; }
+  
+  /* Sections */
+  section { padding: 100px 0; border-top: 1px solid #1a1f2e; }
+  .section-label { color: #14b8a6; font-size: 13px; letter-spacing: 3px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; }
+  .section-title { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; margin-bottom: 24px; max-width: 800px; }
+  .section-subtitle { font-size: 18px; color: #9ca3af; max-width: 700px; margin-bottom: 60px; }
+  
+  /* Problem */
+  .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .problem-card { background: #0d1825; border: 1px solid #1a1f2e; border-radius: 20px; padding: 32px; }
+  .problem-icon { width: 48px; height: 48px; background: rgba(239,68,68,0.1); border: 1px solid #ef4444; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+  .problem-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .problem-card p { color: #9ca3af; font-size: 15px; }
+  
+  /* Solution */
+  .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .solution-card { background: linear-gradient(135deg, #0c1f1f, #0a0e15); border: 1px solid #0f766e; border-radius: 20px; padding: 32px; text-align: center; }
+  .solution-card .num { font-size: 56px; font-weight: 700; color: #14b8a6; font-family: 'Playfair Display', serif; line-height: 1; margin-bottom: 12px; }
+  .solution-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .solution-card p { color: #9ca3af; font-size: 14px; }
+  
+  /* Features */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .feature-card { background: #0d1825; border: 1px solid #1a1f2e; border-radius: 20px; padding: 32px; transition: border-color 0.2s, transform 0.2s; }
+  .feature-card:hover { border-color: #14b8a6; transform: translateY(-4px); }
+  .feature-icon { width: 56px; height: 56px; background: rgba(20,184,166,0.1); border: 1px solid #14b8a6; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
+  .feature-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .feature-card p { color: #9ca3af; font-size: 15px; }
+  
+  /* USP / Comparison */
+  .comparison-table { background: #0d1825; border: 1px solid #1a1f2e; border-radius: 20px; overflow: hidden; }
+  .comparison-table table { width: 100%; border-collapse: collapse; }
+  .comparison-table th, .comparison-table td { padding: 18px 24px; text-align: left; border-bottom: 1px solid #1a1f2e; font-size: 15px; }
+  .comparison-table th { font-weight: 600; color: #9ca3af; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .comparison-table .aricu-col { background: rgba(20,184,166,0.05); color: #14b8a6; font-weight: 600; }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .check-mark { color: #14b8a6; font-weight: 700; }
+  .x-mark { color: #ef4444; font-weight: 700; }
+  
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .pricing-card { background: #0d1825; border: 1px solid #1a1f2e; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; }
+  .pricing-card.featured { border-color: #14b8a6; background: linear-gradient(135deg, #0c1f1f, #0a0e15); position: relative; }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #14b8a6; color: #0a0e15; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+  .pricing-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .pricing-card .desc { color: #9ca3af; font-size: 14px; margin-bottom: 24px; min-height: 40px; }
+  .pricing-card .price { font-size: 48px; font-weight: 700; font-family: 'Playfair Display', serif; line-height: 1; }
+  .pricing-card .price-period { color: #9ca3af; font-size: 14px; margin-top: 8px; margin-bottom: 24px; }
+  .pricing-card ul { list-style: none; padding: 0; margin-bottom: 24px; flex: 1; }
+  .pricing-card li { color: #d1d5db; font-size: 14px; padding: 8px 0; display: flex; align-items: start; gap: 10px; }
+  .pricing-card li::before { content: '✓'; color: #14b8a6; font-weight: 700; flex-shrink: 0; }
+  .pricing-cta { background: #14b8a6; color: #0a0e15; padding: 12px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; text-align: center; transition: transform 0.2s; }
+  .pricing-card:not(.featured) .pricing-cta { background: transparent; color: white; border: 1px solid #1a1f2e; }
+  .pricing-cta:hover { transform: translateY(-2px); }
+  
+  /* About */
+  .about-card { background: linear-gradient(135deg, #0c1f1f, #0a0e15); border: 1px solid #0f766e; border-radius: 24px; padding: 60px; text-align: center; }
+  .about-card .quote { font-size: 24px; font-style: italic; line-height: 1.5; margin-bottom: 32px; font-family: 'Playfair Display', serif; }
+  .about-card .author { color: #14b8a6; font-weight: 600; }
+  
+  /* CTA */
+  .cta-section { background: linear-gradient(135deg, #0c1f1f, #0a0e15); border-radius: 32px; padding: 80px 40px; text-align: center; margin: 100px 24px; border: 1px solid #0f766e; }
+  .cta-section h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; margin-bottom: 16px; }
+  .cta-section p { color: #9ca3af; font-size: 18px; margin-bottom: 32px; }
+  
+  /* Footer */
+  footer { padding: 40px 0; border-top: 1px solid #1a1f2e; color: #6b7280; font-size: 14px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a:hover { color: white; }
+  
+  @media (max-width: 768px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    .comparison-table { overflow-x: auto; }
+    .cta-section { padding: 50px 24px; margin: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">A</div>
+      <div>
+        <div class="logo-text">ARICU</div>
+        <div class="logo-sub">by Dr.Atul Rai</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="https://aricu.easymedicalsolutions.in" class="nav-cta">Login to App →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">✦ NOW LIVE · BUILT IN INDIA</div>
+    <h1 class="serif">Smart ICU Command Center for <em>Indian Hospitals.</em></h1>
+    <p>Real-time vitals, 78+ evidence-based protocols, 28 clinical scores, integrated Code Blue. Built by Indian intensivists for Tier-2/3 hospital ICUs.</p>
+    <div class="hero-ctas">
+      <a href="https://aricu.easymedicalsolutions.in" class="btn-primary">Start 30-day Free Pilot →</a>
+      <a href="#features" class="btn-secondary">Explore features</a>
+    </div>
+    <div class="hero-trust">
+      <span><span class="check">✓</span> No credit card required</span>
+      <span><span class="check">✓</span> Live in 24 hours</span>
+      <span><span class="check">✓</span> From ₹2,999/month</span>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section>
+  <div class="container">
+    <p class="section-label">The problem</p>
+    <h2 class="section-title serif">Indian ICUs deserve better than paper charts and unaffordable software.</h2>
+    <p class="section-subtitle">Most Tier-2/3 hospital ICUs in India still run on manual paper-based monitoring. The alternatives — generic HMS systems or Western EMRs — don't fit.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <h3>Paper-based ICU charts</h3>
+        <p>Lost data, illegible handwriting, no audit trail, NABH compliance gaps, doctors hunting for old vitals during rounds.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⚙️</div>
+        <h3>Generic HMS systems</h3>
+        <p>Built for OPD/IPD billing, not ICU monitoring. Missing protocols, scoring systems, real-time alerts. Nurses end up using paper anyway.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💰</div>
+        <h3>Western EMRs unaffordable</h3>
+        <p>Epic, Cerner cost ₹50 lakh+ to deploy. Six-month implementation. Out of reach for the 7,000+ Tier-2/3 hospitals that need them most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution -->
+<section>
+  <div class="container">
+    <p class="section-label">The solution</p>
+    <h2 class="section-title serif">An ICU EMR your hospital can <em style="color:#14b8a6;font-style:italic;">actually afford</em> and deploy.</h2>
+    <p class="section-subtitle">ARICU brings together everything an ICU team needs — vitals charting, protocols, scores, Code Blue, audit trail — in one mobile-first app.</p>
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="num">24h</div>
+        <h3>Live in 24 hours</h3>
+        <p>From signup to first patient admission</p>
+      </div>
+      <div class="solution-card">
+        <div class="num">📱</div>
+        <h3>Any phone, any tablet</h3>
+        <p>Nothing to install. Works in the browser</p>
+      </div>
+      <div class="solution-card">
+        <div class="num">₹3K</div>
+        <h3>Starting from ₹2,999/mo</h3>
+        <p>1/100th the cost of Western EMRs</p>
+      </div>
+      <div class="solution-card">
+        <div class="num">👨‍⚕️</div>
+        <h3>Built by clinicians</h3>
+        <p>Designed at the bedside, not the boardroom</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <p class="section-label">Features</p>
+    <h2 class="section-title serif">Everything your ICU team needs.<br>In one app.</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real-time Vitals</h3>
+        <p>HR, BP, SpO2, RR, Temperature, GCS, GRBS, Urine Output. Auto-calculates NEWS2, qSOFA, SIRS on every entry. Live updates across team devices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>78+ Indian Protocols</h3>
+        <p>Sepsis 1-hour bundle, ARDS lung-protective, dengue, scrub typhus, OP poisoning, snake bite ASV, status epilepticus, ACLS, DKA, and dozens more — all with decision-support flow.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧮</div>
+        <h3>28 Clinical Scores</h3>
+        <p>APACHE II, SOFA, MELD, GCS, CHA2DS2-VASc, HAS-BLED, HEART, NIHSS, BISAP, Tokyo, Wells, Hunt-Hess and more. Auto-calc plus guided manual entry.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚨</div>
+        <h3>Code Blue Manager</h3>
+        <p>One-tap Code Blue activation. ACLS algorithm walk-through with timer. Drug doses, debrief, automatic event log. Every second timestamped.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🩸</div>
+        <h3>Integrated ABG</h3>
+        <p>pH, pCO2, pO2, HCO3, lactate, electrolytes. P/F ratio auto-calculated. Trend graphs. Connects to ventilator settings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>NABH-Ready Audit</h3>
+        <p>Tamper-evident event log. Every action signed and timestamped. Cryptographic hash chain. Ready for NABH inspections without scrambling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USP / Comparison -->
+<section>
+  <div class="container">
+    <p class="section-label">Why ARICU</p>
+    <h2 class="section-title serif">Why hospitals are choosing ARICU over alternatives.</h2>
+    <p class="section-subtitle">A side-by-side look at how ARICU compares to the typical options Indian hospitals consider.</p>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="aricu-col">ARICU</th>
+            <th>Generic HMS</th>
+            <th>Western EMR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ICU-specific design</td>
+            <td class="aricu-col"><span class="check-mark">✓</span></td>
+            <td><span class="x-mark">✗</span></td>
+            <td><span class="check-mark">✓</span></td>
+          </tr>
+          <tr>
+            <td>Indian protocols (dengue, scrub typhus, OP poisoning)</td>
+            <td class="aricu-col"><span class="check-mark">✓</span></td>
+            <td><span class="x-mark">✗</span></td>
+            <td><span class="x-mark">✗</span></td>
+          </tr>
+          <tr>
+            <td>Mobile-first</td>
+            <td class="aricu-col"><span class="check-mark">✓</span></td>
+            <td>Limited</td>
+            <td><span class="x-mark">✗</span></td>
+          </tr>
+          <tr>
+            <td>Cost (yearly)</td>
+            <td class="aricu-col">₹60K – ₹2.4L</td>
+            <td>₹3 – 5L</td>
+            <td>₹50L+</td>
+          </tr>
+          <tr>
+            <td>Deployment time</td>
+            <td class="aricu-col">24 hours</td>
+            <td>2-4 weeks</td>
+            <td>6-12 months</td>
+          </tr>
+          <tr>
+            <td>Built by clinicians</td>
+            <td class="aricu-col"><span class="check-mark">✓</span></td>
+            <td>Limited</td>
+            <td>Limited</td>
+          </tr>
+          <tr>
+            <td>NABH-ready audit trail</td>
+            <td class="aricu-col"><span class="check-mark">✓</span></td>
+            <td>Limited</td>
+            <td><span class="check-mark">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title serif">Simple, transparent pricing.<br>Pay as you grow.</h2>
+    <p class="section-subtitle">No setup fees. No long-term contracts. Cancel anytime. Annual plans save 17%.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Pilot</h3>
+        <p class="desc">For early adopters trying ARICU</p>
+        <div class="price">₹2,999</div>
+        <p class="price-period">per month · up to 12 beds</p>
+        <ul>
+          <li>All features included</li>
+          <li>Mobile + web access</li>
+          <li>Email support</li>
+          <li>30-day free trial</li>
+        </ul>
+        <a href="https://aricu.easymedicalsolutions.in" class="pricing-cta">Start free trial</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="desc">Smaller hospitals, single ICU</p>
+        <div class="price">₹4,999</div>
+        <p class="price-period">per month · up to 8 beds</p>
+        <ul>
+          <li>All Pilot features</li>
+          <li>Priority support</li>
+          <li>Custom branding</li>
+          <li>Annual: ₹49,999/yr</li>
+        </ul>
+        <a href="https://aricu.easymedicalsolutions.in" class="pricing-cta">Start free trial</a>
+      </div>
+      <div class="pricing-card featured">
+        <span class="featured-badge">MOST POPULAR</span>
+        <h3>Professional</h3>
+        <p class="desc">Standard mid-size hospital ICU</p>
+        <div class="price">₹9,999</div>
+        <p class="price-period">per month · up to 20 beds</p>
+        <ul>
+          <li>All Starter features</li>
+          <li>WhatsApp family updates</li>
+          <li>Phone support</li>
+          <li>Custom protocols</li>
+          <li>Annual: ₹99,999/yr</li>
+        </ul>
+        <a href="https://aricu.easymedicalsolutions.in" class="pricing-cta">Start free trial</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="desc">Multi-unit, hospital chains</p>
+        <div class="price">₹19,999</div>
+        <p class="price-period">per month · unlimited beds</p>
+        <ul>
+          <li>All Professional features</li>
+          <li>ABDM/ABHA integration</li>
+          <li>Dedicated account manager</li>
+          <li>SLA guarantees</li>
+          <li>Annual: ₹1,99,999/yr</li>
+        </ul>
+        <a href="https://aricu.easymedicalsolutions.in" class="pricing-cta">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="about-card">
+      <p class="quote">"I built ARICU because I saw the gap every day at the bedside. ICUs in Tier-2/3 India are doing world-class clinical work with paper charts and Excel. They deserve software that fits how they actually practice."</p>
+      <p class="author">— Dr. Atul Rai, Founder · Easy Medical Solutions</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="container">
+  <div class="cta-section">
+    <h2 class="serif">Ready to upgrade your ICU?</h2>
+    <p>Start a 30-day free pilot. No credit card required. No setup fees.</p>
+    <a href="https://aricu.easymedicalsolutions.in" class="btn-primary" style="display:inline-flex;">Start Free Pilot →</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>© 2026 Easy Medical Solutions · ARICU by Dr.Atul Rai</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="https://aricu.easymedicalsolutions.in">Login</a>
+        <a href="/#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
