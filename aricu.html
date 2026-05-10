@@ -121,15 +121,17 @@ section{padding:96px 0}
 .demo-video .play svg{width:32px;height:32px;fill:white;margin-left:4px}
 .demo-video h3{font-family:'Fraunces',serif;font-size:32px;margin-bottom:8px;font-weight:500}
 .demo-video p{color:rgba(255,255,255,.7);margin-bottom:8px;font-size:16px}
-.screenshots{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.screenshot{background:var(--paper);border-radius:14px;border:1px solid var(--line);overflow:hidden;transition:transform .3s,box-shadow .3s}
-.screenshot:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.screenshot .img-area{aspect-ratio:16/10;background:linear-gradient(135deg,var(--teal-light),#f0f9ff);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:600;font-size:14px;border-bottom:1px solid var(--line);position:relative}
-.screenshot .img-area::after{content:'';position:absolute;inset:16px;border:2px dashed rgba(20,184,166,.3);border-radius:8px}
-.screenshot .label{padding:18px 22px}
-.screenshot .label h4{font-family:'Fraunces',serif;font-size:17px;margin-bottom:4px;color:var(--navy);font-weight:600}
-.screenshot .label p{font-size:13px;color:var(--muted)}
-@media(max-width:768px){.screenshots{grid-template-columns:1fr}}
+.screenshots{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.screenshot{background:transparent;transition:transform .3s}
+.screenshot:hover{transform:translateY(-6px)}
+.screenshot .phone{background:#0a1f2c;border-radius:24px;padding:6px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative;aspect-ratio:9/19}
+.screenshot .phone img{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+.screenshot .label{padding:14px 4px 0;text-align:center}
+.screenshot .label h4{font-family:'Fraunces',serif;font-size:15px;margin-bottom:3px;color:var(--navy);font-weight:600;line-height:1.2}
+.screenshot .label p{font-size:12px;color:var(--muted);line-height:1.4}
+@media(max-width:1024px){.screenshots{grid-template-columns:repeat(4,1fr);gap:14px}}
+@media(max-width:768px){.screenshots{grid-template-columns:repeat(2,1fr);gap:18px}}
+@media(max-width:480px){.screenshots{grid-template-columns:repeat(2,1fr);gap:12px}.screenshot .label h4{font-size:13px}.screenshot .label p{font-size:11px}}
 
 .credits{background:var(--paper)}
 .credits-hero{background:linear-gradient(135deg,var(--navy),var(--teal));border-radius:24px;padding:64px 48px;color:white;margin-top:48px;position:relative;overflow:hidden}
@@ -447,12 +449,14 @@ footer .footer-legal{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;
       </div>
     </a>
     <div class="screenshots">
-      <div class="screenshot"><div class="img-area">[Round Mode Screenshot]</div><div class="label"><h4>Round Mode</h4><p>All ICU patients sorted by severity. NEWS2, qSOFA, SOFA at a glance.</p></div></div>
-      <div class="screenshot"><div class="img-area">[AI Senior Consultant Result]</div><div class="label"><h4>AI Senior Consultant</h4><p>Comprehensive analysis with evidence basis card and action items.</p></div></div>
-      <div class="screenshot"><div class="img-area">[Code Blue Screenshot]</div><div class="label"><h4>Code Blue System</h4><p>One tap. Hospital-wide alarm in 1 second. Live responder tracking.</p></div></div>
-      <div class="screenshot"><div class="img-area">[AI Discharge Summary]</div><div class="label"><h4>AI Discharge Summary</h4><p>Auto-drafted from clinical data. Doctor edits and finalizes in minutes.</p></div></div>
-      <div class="screenshot"><div class="img-area">[Patient Detail Screenshot]</div><div class="label"><h4>Patient Command Center</h4><p>Daily Doctor Note, vitals, labs, alerts — and one-click AI consultant.</p></div></div>
-      <div class="screenshot"><div class="img-area">[Clinical Alerts Dashboard]</div><div class="label"><h4>Smart Alerts</h4><p>40+ rules detect sepsis, AKI, shock, electrolyte emergencies in real-time.</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/round-mode.jpg" alt="Round Mode showing all ICU patients with NEWS scores"></div><div class="label"><h4>Round Mode</h4><p>All ICU patients with vitals and NEWS scores</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/ai-suite.jpg" alt="AI Clinical Assistant with 7 modes"></div><div class="label"><h4>AI Clinical Assistant</h4><p>7 modes including Senior Consultant</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/ai-consultant-note.jpg" alt="AI Senior Consultant generated note with patient trajectory"></div><div class="label"><h4>Senior Consultant Note</h4><p>AI-generated with trajectory analysis</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/code-blue.jpg" alt="Code Blue Active screen with CPR cycle timer"></div><div class="label"><h4>Code Blue Active</h4><p>Live CPR cycles, drugs, rhythm tracking</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/patient-detail.jpg" alt="Patient command center with active support and pending tasks"></div><div class="label"><h4>Patient Command Center</h4><p>Vitals trends, treatments, pending tasks</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/active-protocols.jpg" alt="Smart protocol with conditional decision branches"></div><div class="label"><h4>Smart Protocols</h4><p>GOLD 2024-based decision branches</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/discharge-summary.jpg" alt="AI Discharge Summary draft generation"></div><div class="label"><h4>AI Discharge Summary</h4><p>Auto-drafted from clinical data</p></div></div>
+      <div class="screenshot"><div class="phone"><img src="screenshots/ai-evidence.jpg" alt="Evidence-based analysis with cited guidelines"></div><div class="label"><h4>Evidence Basis</h4><p>Real guidelines cited on every AI output</p></div></div>
     </div>
   </div>
 </section>
