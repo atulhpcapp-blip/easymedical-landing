@@ -2,47 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <meta name="theme-color" content="#003D7A" />
 <title>ARICU User Guides — Pilot Hospital Onboarding</title>
-<meta name="description" content="ARICU pilot hospital onboarding guides for Admin, Doctors, Nurses, Professors. By Dr. Atul Rai, M.D." />
+<meta name="description" content="ARICU pilot hospital onboarding guides. By Dr. Atul Rai, M.D." />
+
+<!-- StPageFlip library for realistic page-curl animation -->
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 
 <style>
-/* ─────────────────────────────────────────────────────────────
-   ARICU FLIPBOOK — designed for clinical credibility
-   Typography: Fraunces (display) + Inter Tight (body, but tweaked)
-   Palette: clinical navy, monitor green, role-specific accents
-   ───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Brand palette */
   --navy-900: #001F3D;
   --navy-800: #003D7A;
   --navy-700: #0066CC;
   --navy-500: #4A9FE6;
   --navy-100: #E3F2FD;
   --navy-50:  #F0F7FF;
-
   --monitor-green: #00FF88;
   --monitor-yellow: #FFEB3B;
   --monitor-cyan: #00BCD4;
   --monitor-orange: #FF9800;
-
   --medical-green: #00A86B;
   --medical-green-pale: #E8F5E9;
   --medical-green-deep: #006B3F;
-
   --teal: #00897B;
   --teal-pale: #E0F2F1;
   --teal-light: #4DB6AC;
-
   --purple: #7B1FA2;
   --purple-pale: #F3E5F5;
   --purple-light: #BA68C8;
-
   --emergency: #D32F2F;
   --warning: #F57C00;
-
   --ink: #0A1929;
   --ink-soft: #2A3B4D;
   --grey: #5A6878;
@@ -50,17 +42,10 @@
   --paper: #FCFCFA;
   --paper-shade: #F5F4F0;
   --paper-edge: #E8E6E0;
-
-  /* Type */
-  --font-display: "Fraunces", "Iowan Old Style", "Hoefler Text", Georgia, serif;
-  --font-body: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Inter Tight", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
-
-  /* Spacing */
-  --pad: clamp(20px, 4vw, 48px);
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -71,13 +56,9 @@ html, body {
   font-family: var(--font-body);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   AMBIENT BACKGROUND — subtle ICU monitor vibe
-   ───────────────────────────────────────────────────────────── */
 body::before {
   content: "";
   position: fixed;
@@ -101,14 +82,9 @@ body::after {
   pointer-events: none;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   APP CHROME — top bar with branding + controls
-   ───────────────────────────────────────────────────────────── */
 .app-chrome {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 50;
   display: flex;
   align-items: center;
@@ -118,13 +94,6 @@ body::after {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 255, 136, 0.15);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: white;
 }
 
 .brand-mark {
@@ -143,14 +112,6 @@ body::after {
   font-weight: 500;
 }
 
-.chrome-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: white;
-  font-size: 12px;
-}
-
 .page-indicator {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -162,156 +123,70 @@ body::after {
   background: rgba(0, 255, 136, 0.05);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   BOOK CONTAINER
-   ───────────────────────────────────────────────────────────── */
 .book-stage {
   position: fixed;
   top: 60px;
   bottom: 80px;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 2400px;
   z-index: 1;
 }
 
-.book {
+#book {
+  margin: 0 auto;
+}
+
+.flip-page {
+  background: var(--paper);
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--ink);
   position: relative;
-  width: min(94vw, 1200px);
-  height: min(82vh, 800px);
-  aspect-ratio: 3 / 2;
-  transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* When fewer than two pages visible (mobile), book becomes single page */
-@media (max-aspect-ratio: 5/4) {
-  .book {
-    aspect-ratio: 2 / 3;
-  }
-}
-
-.page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: var(--paper);
-  transform-origin: right center;
-  transition: transform 0.9s cubic-bezier(0.65, 0.05, 0.36, 1);
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: transform;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-
-.page.right {
-  left: 50%;
-  transform-origin: left center;
-}
-
-/* Spine gradient on inner edges */
-.page.left::after,
-.page.right::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 30px;
-  pointer-events: none;
-  z-index: 5;
-}
-.page.left::after {
-  right: 0;
-  background: linear-gradient(to right, transparent, rgba(0,0,0,0.18));
-}
-.page.right::after {
-  left: 0;
-  background: linear-gradient(to left, transparent, rgba(0,0,0,0.18));
-}
-
-/* Flipped state */
-.page.left.flipped {
-  transform: rotateY(-180deg);
-}
-.page.right.flipped {
-  transform: rotateY(180deg);
-}
-
-.page-face {
-  position: absolute;
-  inset: 0;
-  background: var(--paper);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-}
-
-.page-face.back {
-  transform: rotateY(180deg);
-}
-
-/* Subtle paper texture */
-.page-face::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.012) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(0,0,0,0.012) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 1;
 }
 
 .page-content {
   position: absolute;
   inset: 0;
-  padding: var(--pad);
+  padding: clamp(16px, 3vw, 36px);
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  overflow: hidden;
 }
 
-/* Page number footer */
 .page-number {
   position: absolute;
-  bottom: 16px;
+  bottom: 14px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 1px;
   color: var(--grey-light);
   text-transform: uppercase;
   z-index: 3;
 }
-.page-face .page-number.left { left: 24px; }
-.page-face .page-number.right { right: 24px; }
+.page-number.left { left: 22px; }
+.page-number.right { right: 22px; }
 
-/* Mini header on content pages */
 .page-mini-header {
   position: absolute;
-  top: 16px;
+  top: 14px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--grey-light);
   z-index: 3;
 }
-.page-face .page-mini-header.left { left: 24px; }
-.page-face .page-mini-header.right { right: 24px; }
+.page-mini-header.left { left: 22px; }
+.page-mini-header.right { right: 22px; }
 
-/* ─────────────────────────────────────────────────────────────
-   COVER PAGE
-   ───────────────────────────────────────────────────────────── */
+/* COVER */
 .cover {
-  background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 50%, #002F5C 100%);
+  background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 50%, #002F5C 100%) !important;
   color: white;
   position: relative;
+  height: 100%;
 }
 
 .cover::before {
@@ -321,25 +196,24 @@ body::after {
   background-image:
     linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: 22px 22px;
   z-index: 0;
 }
 
 .cover .page-content {
   z-index: 2;
   justify-content: space-between;
-  padding: 40px 36px;
+  padding: 28px 22px;
 }
 
 .cover-corner {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
 }
 
 .cover-corner-mark {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 2px;
   color: rgba(0,255,136,0.6);
   text-transform: uppercase;
@@ -353,63 +227,44 @@ body::after {
 .cover-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(60px, 9vw, 96px);
+  font-size: clamp(44px, 11vw, 78px);
   line-height: 0.95;
-  letter-spacing: -3px;
+  letter-spacing: -2.5px;
   color: white;
-  margin-bottom: 12px;
-  font-variation-settings: "opsz" 144;
+  margin-bottom: 8px;
 }
 
 .cover-tagline {
-  font-size: 14px;
-  letter-spacing: 4px;
+  font-size: clamp(9px, 1.6vw, 12px);
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.7);
   font-weight: 500;
-  margin-bottom: 32px;
+  margin-bottom: 18px;
 }
 
-.ecg-strip {
-  width: 100%;
-  height: 60px;
-  margin: 24px 0;
-}
-
-.ecg-strip svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+.ecg-strip { width: 100%; height: 46px; margin: 14px 0; }
+.ecg-strip svg { width: 100%; height: 100%; display: block; }
 .ecg-line {
   fill: none;
   stroke: var(--monitor-green);
   stroke-width: 2;
   stroke-linecap: round;
-  stroke-linejoin: round;
   filter: drop-shadow(0 0 4px rgba(0,255,136,0.6));
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: ecgDraw 3s ease-out forwards 0.3s;
-}
-
-@keyframes ecgDraw {
-  to { stroke-dashoffset: 0; }
 }
 
 .vitals-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin: 24px 0;
+  gap: 6px;
+  margin: 14px 0;
 }
 
 .vital-chip {
   background: #000;
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 6px;
-  padding: 10px 12px;
+  border-radius: 4px;
+  padding: 6px 8px;
   text-align: left;
   font-family: var(--font-mono);
   position: relative;
@@ -426,23 +281,23 @@ body::after {
 }
 
 .vital-label {
-  font-size: 9px;
+  font-size: 7px;
   color: rgba(255,255,255,0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .vital-value {
-  font-size: 22px;
+  font-size: clamp(12px, 2.5vw, 16px);
   font-weight: 600;
   line-height: 1;
 }
 
 .vital-unit {
-  font-size: 9px;
+  font-size: 7px;
   color: rgba(255,255,255,0.4);
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .vital-hr { color: var(--monitor-green); }
@@ -450,187 +305,159 @@ body::after {
 .vital-spo2 { color: var(--monitor-cyan); }
 .vital-rr { color: var(--monitor-orange); }
 
-.cover-bottom {
-  text-align: center;
-}
+.cover-bottom { text-align: center; }
 
 .cover-by {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 8px;
   letter-spacing: 3px;
   color: rgba(0,255,136,0.6);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   text-transform: uppercase;
 }
 
 .cover-author {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 34px;
+  font-size: clamp(20px, 4vw, 26px);
   color: white;
-  margin-bottom: 4px;
-  letter-spacing: -1px;
+  margin-bottom: 2px;
+  letter-spacing: -0.6px;
 }
 
 .cover-credentials {
-  font-size: 13px;
+  font-size: 10px;
   color: var(--monitor-green);
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   font-weight: 500;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 .cover-role {
-  font-size: 11px;
+  font-size: 9px;
   color: rgba(255,255,255,0.55);
   font-style: italic;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .cover-badge {
   display: inline-block;
   background: linear-gradient(135deg, var(--medical-green), var(--medical-green-deep));
   color: white;
-  padding: 14px 30px;
-  border-radius: 30px;
-  margin-top: 8px;
-  box-shadow: 0 8px 30px rgba(0,168,107,0.4);
+  padding: 9px 18px;
+  border-radius: 22px;
+  margin-top: 4px;
+  box-shadow: 0 6px 20px rgba(0,168,107,0.4);
 }
 
 .cover-badge-title {
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 4px;
+  letter-spacing: 1.6px;
+  margin-bottom: 2px;
 }
 
 .cover-badge-terms {
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 400;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   opacity: 0.95;
 }
 
 .cover-contact {
-  margin-top: 20px;
-  font-size: 11px;
+  margin-top: 12px;
+  font-size: 8px;
   color: rgba(255,255,255,0.55);
-  letter-spacing: 0.5px;
 }
 
-.cover-contact span {
-  color: var(--monitor-green);
-}
+.cover-contact span { color: var(--monitor-green); }
 
-/* ─────────────────────────────────────────────────────────────
-   TOC PAGE
-   ───────────────────────────────────────────────────────────── */
-.toc-page {
-  padding: 60px 50px 50px !important;
-}
+/* TOC */
+.toc-page { padding: 44px 30px 36px !important; }
 
 .toc-eyebrow {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 3px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--navy-700);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .toc-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 56px;
+  font-size: clamp(30px, 5vw, 42px);
   color: var(--navy-900);
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
   line-height: 1;
-  margin-bottom: 8px;
-  font-variation-settings: "opsz" 144;
+  margin-bottom: 4px;
 }
 
 .toc-sub {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--grey);
-  margin-bottom: 40px;
+  margin-bottom: 22px;
   font-style: italic;
 }
 
 .toc-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .toc-entry {
   display: grid;
-  grid-template-columns: 50px 1fr auto;
+  grid-template-columns: 38px 1fr auto;
   align-items: center;
-  padding: 16px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--paper-edge);
   cursor: pointer;
-  transition: padding-left 0.2s ease, background 0.2s ease;
-  position: relative;
+  transition: padding-left 0.2s ease;
 }
 
-.toc-entry:hover {
-  padding-left: 8px;
-  background: linear-gradient(to right, var(--navy-50), transparent);
-}
+.toc-entry:hover { padding-left: 6px; }
 
 .toc-num {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 28px;
+  font-size: 20px;
   color: var(--toc-color, var(--navy-700));
-  letter-spacing: -1px;
 }
 
 .toc-text strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--toc-color, var(--navy-800));
-  letter-spacing: -0.3px;
   margin-bottom: 2px;
 }
 
 .toc-text span {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--grey);
 }
 
 .toc-page-num {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 9px;
   color: var(--grey);
-  letter-spacing: 1px;
 }
 
-.toc-footer {
-  margin-top: auto;
-  padding-top: 30px;
-  font-size: 11px;
-  color: var(--grey-light);
-  font-style: italic;
-  text-align: center;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   SECTION DIVIDER PAGES
-   ───────────────────────────────────────────────────────────── */
+/* DIVIDERS */
 .divider-page {
   position: relative;
   padding: 0 !important;
+  height: 100%;
 }
 
-.divider-page .divider-bg {
+.divider-bg {
   position: absolute;
   inset: 0;
   display: grid;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 42% 58%;
 }
 
 .divider-left {
@@ -638,176 +465,143 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .divider-right {
   background: var(--paper);
-  padding: 60px 40px;
+  padding: 36px 22px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
 }
 
 .divider-stripe {
   position: absolute;
-  left: 45%;
-  top: 0;
-  bottom: 0;
-  width: 8px;
+  left: 42%;
+  top: 0; bottom: 0;
+  width: 6px;
   background: var(--divider-primary);
-  transform: translateX(-4px);
+  transform: translateX(-3px);
 }
 
 .divider-icon {
-  width: 140px;
-  height: 140px;
+  width: clamp(70px, 14vw, 110px);
+  height: clamp(70px, 14vw, 110px);
   color: var(--divider-primary);
 }
 
 .divider-eyebrow {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 4px;
+  font-size: 9px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--divider-primary);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .divider-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 48px;
+  font-size: clamp(26px, 5vw, 38px);
   color: var(--divider-primary);
-  letter-spacing: -2px;
+  letter-spacing: -1.3px;
   line-height: 1.05;
-  margin-bottom: 16px;
-  font-variation-settings: "opsz" 144;
+  margin-bottom: 10px;
 }
 
 .divider-subtitle {
-  font-size: 15px;
+  font-size: 12px;
   color: var(--ink-soft);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   line-height: 1.5;
-  max-width: 90%;
 }
 
-.divider-ecg {
-  width: 80%;
-  height: 50px;
-}
-
+.divider-ecg { width: 85%; height: 36px; }
 .divider-ecg path {
   fill: none;
   stroke: var(--divider-primary);
   stroke-width: 2;
   stroke-linecap: round;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .divider-cta {
-  margin-top: 24px;
+  margin-top: 16px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--grey);
 }
 
-/* Role-specific divider colors */
-.theme-admin {
-  --divider-primary: var(--navy-700);
-  --divider-pale: var(--navy-50);
-}
+.theme-admin { --divider-primary: var(--navy-700); --divider-pale: var(--navy-50); }
+.theme-doctor { --divider-primary: var(--medical-green-deep); --divider-pale: var(--medical-green-pale); }
+.theme-nurse { --divider-primary: var(--teal); --divider-pale: var(--teal-pale); }
+.theme-professor { --divider-primary: var(--purple); --divider-pale: var(--purple-pale); }
 
-.theme-doctor {
-  --divider-primary: var(--medical-green-deep);
-  --divider-pale: var(--medical-green-pale);
-}
-
-.theme-nurse {
-  --divider-primary: var(--teal);
-  --divider-pale: var(--teal-pale);
-}
-
-.theme-professor {
-  --divider-primary: var(--purple);
-  --divider-pale: var(--purple-pale);
-}
-
-/* ─────────────────────────────────────────────────────────────
-   CONTENT PAGES (per role)
-   ───────────────────────────────────────────────────────────── */
+/* CONTENT */
 .content-page {
-  padding: 50px 40px 36px !important;
+  padding: 36px 24px 26px !important;
   overflow-y: hidden;
 }
 
 .content-page::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
+  top: 0; left: 0; right: 0;
+  height: 5px;
   background: var(--theme-color, var(--navy-700));
 }
 
 .content-eyebrow {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 3px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--theme-color, var(--navy-700));
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .content-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 30px;
-  letter-spacing: -0.5px;
+  font-size: clamp(20px, 3.5vw, 24px);
   color: var(--navy-900);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   line-height: 1.1;
 }
 
 .content-intro {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--grey);
   font-style: italic;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   line-height: 1.4;
 }
 
 .content-page h3 {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--theme-color, var(--navy-800));
-  margin-top: 18px;
-  margin-bottom: 8px;
-  letter-spacing: -0.2px;
+  margin-top: 12px;
+  margin-bottom: 5px;
 }
 
-.content-page h3:first-of-type {
-  margin-top: 4px;
-}
+.content-page h3:first-of-type { margin-top: 2px; }
 
 .content-page p,
 .content-page li {
-  font-size: 12.5px;
-  line-height: 1.55;
+  font-size: 10.5px;
+  line-height: 1.5;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 
 .content-page ol,
 .content-page ul {
-  padding-left: 20px;
-  margin-bottom: 10px;
+  padding-left: 16px;
+  margin-bottom: 6px;
 }
 
 .content-page strong {
@@ -815,157 +609,147 @@ body::after {
   font-weight: 600;
 }
 
-.content-page .credit-cost {
+.credit-cost {
   color: var(--theme-color, var(--navy-700));
   font-weight: 600;
   font-family: var(--font-mono);
-  font-size: 11.5px;
-  padding: 1px 6px;
+  font-size: 9.5px;
+  padding: 1px 5px;
   background: rgba(0, 102, 204, 0.08);
   border-radius: 3px;
-  margin-left: 4px;
 }
 
 .callout-important {
   background: linear-gradient(135deg, rgba(211,47,47,0.06), rgba(211,47,47,0.02));
   border-left: 3px solid var(--emergency);
-  padding: 10px 14px;
-  margin: 12px 0;
-  border-radius: 0 6px 6px 0;
+  padding: 7px 11px;
+  margin: 8px 0;
+  border-radius: 0 5px 5px 0;
 }
 
 .callout-important p {
-  font-size: 12px !important;
+  font-size: 10px !important;
   color: var(--emergency) !important;
   font-weight: 500;
   margin-bottom: 0 !important;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .tool-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin: 10px 0 14px;
+  gap: 5px;
+  margin: 6px 0 10px;
 }
 
 .tool-item {
   background: var(--paper-shade);
-  border-radius: 6px;
-  padding: 10px 12px;
+  border-radius: 5px;
+  padding: 7px 9px;
   border-left: 3px solid var(--theme-color, var(--navy-700));
 }
 
 .tool-name {
   font-weight: 600;
-  font-size: 12.5px;
+  font-size: 10.5px;
   color: var(--navy-900);
   margin-bottom: 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
-.tool-name .credit-cost {
-  font-size: 10px;
-  margin-left: 0;
-}
+.tool-name .credit-cost { font-size: 9px; }
 
 .tool-desc {
-  font-size: 11.5px;
+  font-size: 9.5px;
   color: var(--grey);
   line-height: 1.4;
 }
 
-/* Themes for content pages */
 .theme-admin-content { --theme-color: var(--navy-700); }
 .theme-doctor-content { --theme-color: var(--medical-green-deep); }
 .theme-nurse-content { --theme-color: var(--teal); }
 .theme-professor-content { --theme-color: var(--purple); }
-.theme-support-content { --theme-color: var(--navy-800); }
 
-/* ─────────────────────────────────────────────────────────────
-   FINAL THANK YOU PAGE
-   ───────────────────────────────────────────────────────────── */
+/* THANK YOU */
 .thank-you-page {
-  background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-800)) !important;
   color: white;
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 50px !important;
+  padding: 36px 26px !important;
+  height: 100%;
 }
 
-.thank-you-page .ty-eyebrow {
+.ty-eyebrow {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 4px;
+  font-size: 9px;
+  letter-spacing: 3px;
   color: var(--monitor-green);
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .thank-you-page h2 {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: clamp(22px, 4.5vw, 32px);
   font-weight: 600;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
-  margin-bottom: 24px;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 16px;
   color: white;
 }
 
 .thank-you-page p {
-  font-size: 14px;
+  font-size: 11px;
   color: rgba(255,255,255,0.75);
-  line-height: 1.6;
-  max-width: 85%;
-  margin: 0 auto 24px;
+  line-height: 1.55;
+  max-width: 90%;
+  margin: 0 auto 14px;
 }
 
 .ty-signature {
-  margin-top: 30px;
-  padding-top: 30px;
+  margin-top: 18px;
+  padding-top: 18px;
   border-top: 1px solid rgba(0,255,136,0.2);
 }
 
 .ty-name {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 600;
   color: white;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .ty-cred {
-  font-size: 11px;
+  font-size: 9px;
   color: var(--monitor-green);
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .ty-contact {
-  font-size: 11px;
+  font-size: 9px;
   color: rgba(255,255,255,0.5);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   CONTROLS (bottom bar)
-   ───────────────────────────────────────────────────────────── */
+/* CONTROLS */
 .controls {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 18px 24px;
+  gap: 12px;
+  padding: 16px 20px;
   background: linear-gradient(0deg, rgba(0,15,30,0.95) 0%, rgba(0,15,30,0.7) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -977,10 +761,10 @@ body::after {
   border: 1px solid rgba(0, 255, 136, 0.3);
   color: var(--monitor-green);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 10px 18px;
+  padding: 9px 14px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -990,22 +774,13 @@ body::after {
 .btn:hover:not(:disabled) {
   background: rgba(0, 255, 136, 0.15);
   border-color: var(--monitor-green);
-  box-shadow: 0 0 20px rgba(0,255,136,0.25);
+  box-shadow: 0 0 16px rgba(0,255,136,0.25);
 }
 
-.btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.btn-icon {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .progress-track {
-  width: min(40vw, 240px);
+  width: min(40vw, 220px);
   height: 3px;
   background: rgba(255,255,255,0.08);
   border-radius: 2px;
@@ -1015,113 +790,18 @@ body::after {
 
 .progress-fill {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   height: 100%;
   background: linear-gradient(90deg, var(--monitor-green), var(--monitor-cyan));
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 12px rgba(0,255,136,0.5);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   MOBILE — single page view
-   ───────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .book {
-    aspect-ratio: 3 / 4;
-    height: min(78vh, 700px);
-  }
-
-  .page {
-    width: 100%;
-    transform-origin: center center !important;
-  }
-
-  .page.right {
-    left: 0;
-    display: none;
-  }
-
-  .page.left.flipped {
-    transform: rotateY(180deg);
-  }
-
-  .divider-page .divider-bg {
-    grid-template-columns: 1fr;
-    grid-template-rows: 40% 60%;
-  }
-
-  .divider-stripe {
-    left: 0;
-    right: 0;
-    top: 40%;
-    bottom: auto;
-    width: 100%;
-    height: 6px;
-    transform: translateY(-3px);
-  }
-
-  .divider-icon {
-    width: 80px;
-    height: 80px;
-  }
-
-  .divider-title {
-    font-size: 30px;
-  }
-
-  .cover-title {
-    font-size: 56px;
-  }
-
-  .toc-title {
-    font-size: 36px;
-  }
-
-  .content-page {
-    padding: 40px 24px 30px !important;
-  }
-
-  .content-title {
-    font-size: 24px;
-  }
-
-  .vitals-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 600px) {
+  .btn-text-long { display: none; }
 }
 
-/* Hide controls on touch devices to give more space (use swipe) */
-@media (hover: none) and (pointer: coarse) {
-  .controls .btn-text {
-    display: none;
-  }
-}
-
-/* Initial load animation */
-.book {
-  animation: bookEnter 1s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-}
-
-@keyframes bookEnter {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Hide non-active pages for performance */
-.page.hidden {
-  display: none;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   LOAD OVERLAY
-   ───────────────────────────────────────────────────────────── */
+/* LOADER */
 .loader {
   position: fixed;
   inset: 0;
@@ -1133,993 +813,677 @@ body::after {
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
-.loader.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loader-content {
-  text-align: center;
-  color: var(--monitor-green);
-}
+.loader.hidden { opacity: 0; visibility: hidden; }
 
 .loader-pulse {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 16px;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 14px;
   border: 2px solid rgba(0,255,136,0.2);
   border-top-color: var(--monitor-green);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .loader-text {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
+  color: var(--monitor-green);
+  text-align: center;
 }
 
+.stf__parent { margin: 0 auto; }
+.stf__block { background: var(--paper); }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="loader" id="loader">
-  <div class="loader-content">
+  <div>
     <div class="loader-pulse"></div>
     <div class="loader-text">Initializing ARICU</div>
   </div>
 </div>
 
-<!-- TOP CHROME -->
 <div class="app-chrome">
-  <div class="brand">
-    <div>
-      <div class="brand-mark">ARICU</div>
-      <div class="brand-sub">by Dr. Atul Rai, M.D.</div>
-    </div>
+  <div>
+    <div class="brand-mark">ARICU</div>
+    <div class="brand-sub">by Dr. Atul Rai, M.D.</div>
   </div>
-  <div class="chrome-right">
-    <span class="page-indicator" id="pageIndicator">01 / 16</span>
-  </div>
+  <div class="page-indicator" id="pageIndicator">01 / 17</div>
 </div>
 
-<!-- BOOK -->
 <div class="book-stage">
-  <div class="book" id="book">
-    <!-- Pages get rendered by JS -->
-  </div>
+  <div id="book"></div>
 </div>
 
-<!-- BOTTOM CONTROLS -->
 <div class="controls">
-  <button class="btn" id="firstBtn" title="First page">
-    <span class="btn-text">⟨⟨ START</span>
-  </button>
-  <button class="btn" id="prevBtn" title="Previous page">
-    <span class="btn-text">◄ PREV</span>
-  </button>
-
+  <button class="btn" id="firstBtn">⟨⟨</button>
+  <button class="btn" id="prevBtn">◄ <span class="btn-text-long">PREV</span></button>
   <div class="progress-track">
     <div class="progress-fill" id="progressFill"></div>
   </div>
-
-  <button class="btn" id="nextBtn" title="Next page">
-    <span class="btn-text">NEXT ►</span>
-  </button>
-  <button class="btn" id="lastBtn" title="Last page">
-    <span class="btn-text">END ⟩⟩</span>
-  </button>
+  <button class="btn" id="nextBtn"><span class="btn-text-long">NEXT</span> ►</button>
+  <button class="btn" id="lastBtn">⟩⟩</button>
 </div>
 
 <script>
-// ────────────────────────────────────────────────────────────
-// ARICU FLIPBOOK ENGINE
-// ────────────────────────────────────────────────────────────
-
-const PAGES = [
-  // PAGE 1 — COVER
-  {
-    type: 'cover',
-    html: `
-      <div class="cover">
-        <div class="page-content">
-          <div class="cover-corner">
-            <span class="cover-corner-mark">ARICU / V1</span>
-            <span class="cover-corner-mark">EST. 2026</span>
-          </div>
-
-          <div class="cover-center">
-            <h1 class="cover-title">ARICU</h1>
-            <div class="cover-tagline">AI-POWERED ICU COMMAND CENTER</div>
-
-            <div class="ecg-strip">
-              <svg viewBox="0 0 800 80" preserveAspectRatio="none">
-                <path class="ecg-line" d="M0,40 L80,40 L100,38 L110,42 L130,40 L160,40 L170,32 L180,15 L185,68 L195,38 L210,40 L250,40 L270,38 L280,40 L320,40 L340,32 L350,15 L355,68 L365,38 L380,40 L420,40 L440,38 L450,40 L490,40 L510,32 L520,15 L525,68 L535,38 L550,40 L590,40 L610,38 L620,40 L660,40 L680,32 L690,15 L695,68 L705,38 L720,40 L800,40" />
-              </svg>
-            </div>
-
-            <div class="vitals-row">
-              <div class="vital-chip vital-hr">
-                <div class="vital-label">HR</div>
-                <div class="vital-value">72</div>
-                <div class="vital-unit">bpm</div>
-              </div>
-              <div class="vital-chip vital-bp">
-                <div class="vital-label">BP</div>
-                <div class="vital-value">120/80</div>
-                <div class="vital-unit">mmHg</div>
-              </div>
-              <div class="vital-chip vital-spo2">
-                <div class="vital-label">SpO₂</div>
-                <div class="vital-value">98</div>
-                <div class="vital-unit">%</div>
-              </div>
-              <div class="vital-chip vital-rr">
-                <div class="vital-label">RR</div>
-                <div class="vital-value">14</div>
-                <div class="vital-unit">/min</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cover-bottom">
-            <div class="cover-by">BY</div>
-            <div class="cover-author">Dr. Atul Rai</div>
-            <div class="cover-credentials">M.D. Physician</div>
-            <div class="cover-role">Intensivist · Founder, Easy Medical Solutions · Hyderabad</div>
-
-            <div class="cover-badge">
-              <div class="cover-badge-title">FOUNDING PARTNER PILOT</div>
-              <div class="cover-badge-terms">3 Months Free · 50 AI Credits / Month · 30% Lifetime Discount</div>
-            </div>
-
-            <div class="cover-contact">
-              <span>WhatsApp: +91 7013211742</span> &nbsp;·&nbsp; aricu.easymedicalsolutions.in
-            </div>
-          </div>
+const PAGES_HTML = [
+  `<div class="cover">
+    <div class="page-content">
+      <div class="cover-corner">
+        <span class="cover-corner-mark">ARICU / V1</span>
+        <span class="cover-corner-mark">EST. 2026</span>
+      </div>
+      <div class="cover-center">
+        <h1 class="cover-title">ARICU</h1>
+        <div class="cover-tagline">AI-POWERED ICU COMMAND CENTER</div>
+        <div class="ecg-strip">
+          <svg viewBox="0 0 800 80" preserveAspectRatio="none">
+            <path class="ecg-line" d="M0,40 L80,40 L100,38 L110,42 L130,40 L160,40 L170,32 L180,15 L185,68 L195,38 L210,40 L250,40 L270,38 L280,40 L320,40 L340,32 L350,15 L355,68 L365,38 L380,40 L420,40 L440,38 L450,40 L490,40 L510,32 L520,15 L525,68 L535,38 L550,40 L590,40 L610,38 L620,40 L660,40 L680,32 L690,15 L695,68 L705,38 L720,40 L800,40" />
+          </svg>
+        </div>
+        <div class="vitals-row">
+          <div class="vital-chip vital-hr"><div class="vital-label">HR</div><div class="vital-value">72</div><div class="vital-unit">bpm</div></div>
+          <div class="vital-chip vital-bp"><div class="vital-label">BP</div><div class="vital-value">120/80</div><div class="vital-unit">mmHg</div></div>
+          <div class="vital-chip vital-spo2"><div class="vital-label">SpO₂</div><div class="vital-value">98</div><div class="vital-unit">%</div></div>
+          <div class="vital-chip vital-rr"><div class="vital-label">RR</div><div class="vital-value">14</div><div class="vital-unit">/min</div></div>
         </div>
       </div>
-    `
-  },
-
-  // PAGE 2 — TOC
-  {
-    type: 'toc',
-    html: `
-      <div class="page-mini-header right">PILOT ONBOARDING / 2026</div>
-      <div class="page-content toc-page">
-        <div class="toc-eyebrow">— TABLE OF CONTENTS</div>
-        <h2 class="toc-title">Contents</h2>
-        <p class="toc-sub">Quick navigation to each role-specific guide.</p>
-
-        <div class="toc-list">
-          <div class="toc-entry" data-target="3" style="--toc-color: var(--navy-700);">
-            <span class="toc-num">01</span>
-            <div class="toc-text">
-              <strong>For Hospital Admin</strong>
-              <span>Manage users, settings, billing oversight</span>
-            </div>
-            <span class="toc-page-num">p. 04</span>
-          </div>
-          <div class="toc-entry" data-target="5" style="--toc-color: var(--medical-green-deep);">
-            <span class="toc-num">02</span>
-            <div class="toc-text">
-              <strong>For Doctors</strong>
-              <span>Round Mode, AI tools, orders, discharge</span>
-            </div>
-            <span class="toc-page-num">p. 06</span>
-          </div>
-          <div class="toc-entry" data-target="9" style="--toc-color: var(--teal);">
-            <span class="toc-num">03</span>
-            <div class="toc-text">
-              <strong>For Nurses</strong>
-              <span>Vitals entry, alerts, I/O, observations</span>
-            </div>
-            <span class="toc-page-num">p. 10</span>
-          </div>
-          <div class="toc-entry" data-target="13" style="--toc-color: var(--purple);">
-            <span class="toc-num">04</span>
-            <div class="toc-text">
-              <strong>For Professors</strong>
-              <span>Submit cases, protocols, teaching content</span>
-            </div>
-            <span class="toc-page-num">p. 14</span>
-          </div>
-          <div class="toc-entry" data-target="15" style="--toc-color: var(--navy-800);">
-            <span class="toc-num">05</span>
-            <div class="toc-text">
-              <strong>Pilot Support & Contact</strong>
-              <span>Get help during your 3-month pilot</span>
-            </div>
-            <span class="toc-page-num">p. 16</span>
-          </div>
+      <div class="cover-bottom">
+        <div class="cover-by">BY</div>
+        <div class="cover-author">Dr. Atul Rai</div>
+        <div class="cover-credentials">M.D. Physician</div>
+        <div class="cover-role">Intensivist · Founder, Easy Medical Solutions · Hyderabad</div>
+        <div class="cover-badge">
+          <div class="cover-badge-title">FOUNDING PARTNER PILOT</div>
+          <div class="cover-badge-terms">3 Months Free · 50 AI Credits / Month · 30% Lifetime Discount</div>
         </div>
-
-        <div class="toc-footer">
-          Tap any section to jump · Drag corners to flip pages
+        <div class="cover-contact">
+          <span>WhatsApp +91 7013211742</span> &nbsp;·&nbsp; aricu.easymedicalsolutions.in
         </div>
       </div>
-      <div class="page-number left">02</div>
-    `
-  },
+    </div>
+  </div>`,
 
-  // PAGE 3 — ADMIN DIVIDER
-  {
-    type: 'divider',
-    theme: 'theme-admin',
-    html: `
-      <div class="divider-page theme-admin">
-        <div class="divider-bg">
-          <div class="divider-left">
-            <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-              <circle cx="50" cy="50" r="35" />
-              <line x1="20" y1="50" x2="80" y2="50" stroke-width="4" />
-              <line x1="50" y1="20" x2="50" y2="80" stroke-width="4" />
-              <circle cx="32" cy="32" r="3" fill="currentColor"/>
-              <circle cx="68" cy="32" r="3" fill="currentColor"/>
-              <circle cx="32" cy="68" r="3" fill="currentColor"/>
-              <circle cx="68" cy="68" r="3" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="divider-stripe"></div>
-          <div class="divider-right">
-            <div class="divider-eyebrow">— GUIDE 01</div>
-            <h2 class="divider-title">For Hospital<br/>Admin</h2>
-            <p class="divider-subtitle">Manage your hospital's ARICU account: users, settings, audit trail, and pilot oversight.</p>
-            <svg class="divider-ecg" viewBox="0 0 400 50">
-              <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
-            </svg>
-            <div class="divider-cta">Detailed instructions follow →</div>
-          </div>
-        </div>
+  `<div class="page-mini-header right">PILOT ONBOARDING / 2026</div>
+   <div class="page-content toc-page">
+    <div class="toc-eyebrow">— TABLE OF CONTENTS</div>
+    <h2 class="toc-title">Contents</h2>
+    <p class="toc-sub">Quick navigation to each role-specific guide.</p>
+    <div class="toc-list">
+      <div class="toc-entry" data-target="2" style="--toc-color: var(--navy-700);">
+        <span class="toc-num">01</span>
+        <div class="toc-text"><strong>For Hospital Admin</strong><span>Manage users, settings, oversight</span></div>
+        <span class="toc-page-num">p. 04</span>
       </div>
-      <div class="page-number right">03</div>
-    `
-  },
-
-  // PAGE 4 — ADMIN CONTENT
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header left">GUIDE 01 / FOR HOSPITAL ADMIN</div>
-      <div class="page-content content-page theme-admin-content">
-        <div class="content-eyebrow">— GUIDE 01</div>
-        <h2 class="content-title">For Hospital Admin</h2>
-        <p class="content-intro">You manage your hospital's ARICU account — users, settings, and audit oversight.</p>
-
-        <h3>Step 1 — Login</h3>
-        <ol>
-          <li>Open <strong>aricu.easymedicalsolutions.in</strong> on any browser.</li>
-          <li>Login with the email and password sent to you on WhatsApp.</li>
-          <li>Go to Account Settings and change your password.</li>
-        </ol>
-
-        <h3>Step 2 — Add Your Team (15 min)</h3>
-        <p>Go to <strong>Admin Dashboard → Users → Add User</strong></p>
-        <p>For each person, enter:</p>
-        <ul>
-          <li>Full name</li>
-          <li>Email or mobile number</li>
-          <li>Role: Doctor / Nurse / Professor</li>
-          <li>Department (ICU / Cardiology / etc.)</li>
-          <li>Click Save</li>
-        </ul>
-        <p>They will receive a WhatsApp message with login credentials.</p>
-
-        <h3>Step 3 — Daily Tasks</h3>
-        <ul>
-          <li>Monitor user activity in Admin Dashboard</li>
-          <li>Add new staff when they join</li>
-          <li>Remove staff when they leave</li>
-          <li>Track ARICU usage statistics</li>
-          <li>View audit trail for NABH compliance</li>
-        </ul>
+      <div class="toc-entry" data-target="4" style="--toc-color: var(--medical-green-deep);">
+        <span class="toc-num">02</span>
+        <div class="toc-text"><strong>For Doctors</strong><span>Round Mode, AI tools, orders, discharge</span></div>
+        <span class="toc-page-num">p. 06</span>
       </div>
-      <div class="page-number left">04</div>
-    `
-  },
-
-  // PAGE 5 — ADMIN CONTENT (continued)
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 01 / FOR HOSPITAL ADMIN</div>
-      <div class="page-content content-page theme-admin-content">
-        <h3>Step 4 — Your Pilot Includes</h3>
-        <p>During your 3-month Founding Partner Pilot (free trial):</p>
-        <ul>
-          <li>Unlimited doctor, nurse, professor accounts</li>
-          <li><strong>50 AI credits per month</strong> as trial allocation</li>
-          <li>All AI tools: Senior Consultant, Resident, Differential, Treatment Plan, Counseling Script, Deep Reasoning</li>
-          <li>All clinical scores (NEWS2, qSOFA, SOFA, etc.)</li>
-          <li>Auto-triggering protocols (sepsis, hypertensive emergency)</li>
-          <li>Dedicated WhatsApp support from Dr. Atul</li>
-          <li>Weekly check-in call on Fridays</li>
-          <li>Top-up credits available if needed during pilot</li>
-          <li>After pilot: 30% lifetime discount on regular pricing</li>
-        </ul>
-
-        <h3>Step 5 — Support</h3>
-        <p><strong>WhatsApp Dr. Atul:</strong> +91 7013211742</p>
-        <p><strong>Response time:</strong> Within 4 hours daytime, next morning at night</p>
-        <p><strong>Weekly check-in:</strong> Every Friday 6 PM IST (optional)</p>
-
-        <div class="callout-important">
-          <p>You are the hospital's primary contact for ARICU. Any technical issue from your team comes to you first — escalate to Dr. Atul when needed.</p>
-        </div>
+      <div class="toc-entry" data-target="8" style="--toc-color: var(--teal);">
+        <span class="toc-num">03</span>
+        <div class="toc-text"><strong>For Nurses</strong><span>Vitals entry, alerts, I/O, observations</span></div>
+        <span class="toc-page-num">p. 10</span>
       </div>
-      <div class="page-number right">05</div>
-    `
-  },
-
-  // PAGE 6 — DOCTOR DIVIDER
-  {
-    type: 'divider',
-    html: `
-      <div class="divider-page theme-doctor">
-        <div class="divider-bg">
-          <div class="divider-left">
-            <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-              <path d="M50,80 Q20,60 20,40 Q20,20 35,20 Q45,20 50,30 Q55,20 65,20 Q80,20 80,40 Q80,60 50,80 Z" fill="currentColor" opacity="0.2"/>
-              <path d="M50,80 Q20,60 20,40 Q20,20 35,20 Q45,20 50,30 Q55,20 65,20 Q80,20 80,40 Q80,60 50,80 Z" />
-              <rect x="44" y="38" width="12" height="22" fill="currentColor"/>
-              <rect x="36" y="46" width="28" height="6" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="divider-stripe"></div>
-          <div class="divider-right">
-            <div class="divider-eyebrow">— GUIDE 02</div>
-            <h2 class="divider-title">For<br/>Doctors</h2>
-            <p class="divider-subtitle">Round, decide, AI-assist, document. ARICU helps you make faster, safer ICU decisions while keeping clinical judgment yours.</p>
-            <svg class="divider-ecg" viewBox="0 0 400 50">
-              <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
-            </svg>
-            <div class="divider-cta">Detailed instructions follow →</div>
-          </div>
-        </div>
+      <div class="toc-entry" data-target="12" style="--toc-color: var(--purple);">
+        <span class="toc-num">04</span>
+        <div class="toc-text"><strong>For Professors</strong><span>Submit cases, protocols, teaching</span></div>
+        <span class="toc-page-num">p. 14</span>
       </div>
-      <div class="page-number left">06</div>
-    `
-  },
-
-  // PAGE 7 — DOCTOR CONTENT
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 02 / FOR DOCTORS</div>
-      <div class="page-content content-page theme-doctor-content">
-        <div class="content-eyebrow">— GUIDE 02</div>
-        <h2 class="content-title">For Doctors</h2>
-        <p class="content-intro">ARICU helps you make faster, safer ICU decisions. AI is decision support only. Your clinical judgment is final.</p>
-
-        <h3>Step 1 — Login</h3>
-        <ol>
-          <li>Open <strong>aricu.easymedicalsolutions.in</strong> on phone, tablet, or laptop.</li>
-          <li>Login with your email and password from WhatsApp.</li>
-          <li>Change your password from Account Settings.</li>
-        </ol>
-
-        <h3>Step 2 — Round Mode</h3>
-        <p>Round Mode is your starting point — see all ICU patients at one glance.</p>
-        <ul>
-          <li>Each bed shows: latest vitals, NEWS2, qSOFA, active alerts</li>
-          <li>Click any bed for full patient details</li>
-          <li>Alerts highlighted in red (critical) or orange (warning)</li>
-        </ul>
-
-        <h3>Step 3 — Open a Patient</h3>
-        <ul>
-          <li>Full clinical history</li>
-          <li>Current vitals (entered by nurses)</li>
-          <li>Latest labs and ABG</li>
-          <li>Active alerts and protocols</li>
-        </ul>
+      <div class="toc-entry" data-target="16" style="--toc-color: var(--navy-800);">
+        <span class="toc-num">05</span>
+        <div class="toc-text"><strong>Final Thank You</strong><span>Closing message and contact</span></div>
+        <span class="toc-page-num">p. 17</span>
       </div>
-      <div class="page-number right">07</div>
-    `
-  },
+    </div>
+   </div>
+   <div class="page-number left">02</div>`,
 
-  // PAGE 8 — DOCTOR CONTENT (AI Tools)
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header left">GUIDE 02 / FOR DOCTORS</div>
-      <div class="page-content content-page theme-doctor-content">
-        <h3>Step 4 — Use AI Tools</h3>
-        <p>On any patient page, you can use these AI features:</p>
-
-        <div class="tool-list">
-          <div class="tool-item">
-            <div class="tool-name">AI Senior Consultant <span class="credit-cost">9 credits</span></div>
-            <div class="tool-desc">Full 21-section clinical analysis. 50-60 sec. Red flags, differential, working diagnosis, management plan with Indian brand names.</div>
-          </div>
-          <div class="tool-item">
-            <div class="tool-name">AI Resident <span class="credit-cost">3 credits</span></div>
-            <div class="tool-desc">Set frequency (2/4/6/8/12 hr). Auto-reviews patient at intervals, flags critical findings.</div>
-          </div>
-          <div class="tool-item">
-            <div class="tool-name">Differential <span class="credit-cost">5 credits</span></div>
-            <div class="tool-desc">Type chief complaint. Get differential diagnosis with reasoning.</div>
-          </div>
-          <div class="tool-item">
-            <div class="tool-name">Treatment Plan <span class="credit-cost">5 credits</span></div>
-            <div class="tool-desc">Type working diagnosis. Get evidence-based plan, Indian drug brands, renal-adjusted dosing.</div>
-          </div>
-          <div class="tool-item">
-            <div class="tool-name">Counseling Script <span class="credit-cost">2 credits</span></div>
-            <div class="tool-desc">Type a topic. Get family counseling script in simple language.</div>
-          </div>
-          <div class="tool-item">
-            <div class="tool-name">Deep Reasoning <span class="credit-cost">15 credits</span></div>
-            <div class="tool-desc">Premium AI for complex cases. 5-10 min. Notification fires when ready.</div>
-          </div>
-        </div>
+  `<div class="divider-page theme-admin">
+    <div class="divider-bg">
+      <div class="divider-left">
+        <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+          <circle cx="50" cy="50" r="35" />
+          <line x1="20" y1="50" x2="80" y2="50" stroke-width="4" />
+          <line x1="50" y1="20" x2="50" y2="80" stroke-width="4" />
+          <circle cx="32" cy="32" r="3" fill="currentColor"/>
+          <circle cx="68" cy="32" r="3" fill="currentColor"/>
+          <circle cx="32" cy="68" r="3" fill="currentColor"/>
+          <circle cx="68" cy="68" r="3" fill="currentColor"/>
+        </svg>
       </div>
-      <div class="page-number left">08</div>
-    `
-  },
-
-  // PAGE 9 — DOCTOR CONTENT (Orders, Notes, Discharge)
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 02 / FOR DOCTORS</div>
-      <div class="page-content content-page theme-doctor-content">
-        <h3>Step 5 — Order Medications</h3>
-        <ol>
-          <li>Click <strong>+ New Order</strong> on patient page</li>
-          <li>Type medication, dose, route, frequency</li>
-          <li>Save — nurse acknowledges at bedside</li>
-        </ol>
-
-        <h3>Step 6 — Daily Doctor Note</h3>
-        <ul>
-          <li>Open patient</li>
-          <li>Add today's clinical impression, assessment, plan</li>
-          <li>Save — visible to entire team</li>
-        </ul>
-
-        <h3>Step 7 — Discharge Patient</h3>
-        <ol>
-          <li>Click <strong>Discharge Patient</strong> (top-right)</li>
-          <li>Click <strong>AI Discharge Summary</strong> — auto-generated</li>
-          <li>Review, edit if needed, click Finalize</li>
-        </ol>
-
-        <h3>Important Rules</h3>
-        <div class="callout-important">
-          <p>AI is decision support, not decision making. Always verify AI recommendations against your clinical judgment before acting.</p>
-        </div>
-        <ul>
-          <li>Every action is logged for audit</li>
-          <li>Patient data stored on Indian servers (Mumbai)</li>
-          <li>NABH-ready audit trail, DPDP compliant</li>
-        </ul>
-
-        <h3>Support</h3>
-        <p><strong>WhatsApp Dr. Atul:</strong> +91 7013211742</p>
+      <div class="divider-stripe"></div>
+      <div class="divider-right">
+        <div class="divider-eyebrow">— GUIDE 01</div>
+        <h2 class="divider-title">For Hospital<br/>Admin</h2>
+        <p class="divider-subtitle">Manage your hospital's ARICU account: users, settings, audit trail.</p>
+        <svg class="divider-ecg" viewBox="0 0 400 50">
+          <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
+        </svg>
+        <div class="divider-cta">Detailed instructions follow →</div>
       </div>
-      <div class="page-number right">09</div>
-    `
-  },
+    </div>
+   </div>
+   <div class="page-number right">03</div>`,
 
-  // PAGE 10 — NURSE DIVIDER
-  {
-    type: 'divider',
-    html: `
-      <div class="divider-page theme-nurse">
-        <div class="divider-bg">
-          <div class="divider-left">
-            <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-              <circle cx="30" cy="20" r="6" fill="currentColor"/>
-              <circle cx="70" cy="20" r="6" fill="currentColor"/>
-              <path d="M30,26 Q30,40 50,55 Q70,40 70,26" />
-              <circle cx="50" cy="75" r="14" fill="currentColor" fill-opacity="0.2"/>
-              <circle cx="50" cy="75" r="14" />
-              <circle cx="50" cy="75" r="6" fill="currentColor"/>
-              <line x1="50" y1="55" x2="50" y2="61"/>
-            </svg>
-          </div>
-          <div class="divider-stripe"></div>
-          <div class="divider-right">
-            <div class="divider-eyebrow">— GUIDE 03</div>
-            <h2 class="divider-title">For<br/>Nurses</h2>
-            <p class="divider-subtitle">Vitals, observation, alerts — the foundation. Your timely entries make every AI recommendation possible.</p>
-            <svg class="divider-ecg" viewBox="0 0 400 50">
-              <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
-            </svg>
-            <div class="divider-cta">Detailed instructions follow →</div>
-          </div>
-        </div>
+  `<div class="page-mini-header left">GUIDE 01 / FOR HOSPITAL ADMIN</div>
+   <div class="page-content content-page theme-admin-content">
+    <div class="content-eyebrow">— GUIDE 01</div>
+    <h2 class="content-title">For Hospital Admin</h2>
+    <p class="content-intro">You manage your hospital's ARICU account.</p>
+    <h3>Step 1 — Login</h3>
+    <ol>
+      <li>Open <strong>aricu.easymedicalsolutions.in</strong></li>
+      <li>Login with email/password from WhatsApp</li>
+      <li>Change password in Account Settings</li>
+    </ol>
+    <h3>Step 2 — Add Your Team (15 min)</h3>
+    <p>Go to <strong>Admin Dashboard → Users → Add User</strong></p>
+    <p>For each person, enter:</p>
+    <ul>
+      <li>Full name, email or mobile</li>
+      <li>Role: Doctor / Nurse / Professor</li>
+      <li>Department (ICU / Cardiology / etc.)</li>
+      <li>Click Save</li>
+    </ul>
+    <p>They receive WhatsApp message with login.</p>
+    <h3>Step 3 — Daily Tasks</h3>
+    <ul>
+      <li>Monitor user activity in dashboard</li>
+      <li>Add new staff when they join</li>
+      <li>Remove staff when they leave</li>
+      <li>Track ARICU usage statistics</li>
+      <li>View audit trail for NABH compliance</li>
+    </ul>
+   </div>
+   <div class="page-number left">04</div>`,
+
+  `<div class="page-mini-header right">GUIDE 01 / FOR HOSPITAL ADMIN</div>
+   <div class="page-content content-page theme-admin-content">
+    <h3>Step 4 — Your Pilot Includes</h3>
+    <p>During your 3-month Founding Partner Pilot (free trial):</p>
+    <ul>
+      <li>Unlimited doctor, nurse, professor accounts</li>
+      <li><strong>50 AI credits per month</strong> trial allocation</li>
+      <li>All AI tools: Senior Consultant, Resident, Differential, Treatment Plan, Counseling, Deep Reasoning</li>
+      <li>All clinical scores (NEWS2, qSOFA, SOFA)</li>
+      <li>Auto-triggering protocols (sepsis, hypertensive emergency)</li>
+      <li>Dedicated WhatsApp support from Dr. Atul</li>
+      <li>Weekly check-in call on Fridays</li>
+      <li>Top-up credits available during pilot</li>
+      <li>After pilot: 30% lifetime discount</li>
+    </ul>
+    <h3>Step 5 — Support</h3>
+    <p><strong>WhatsApp Dr. Atul:</strong> +91 7013211742</p>
+    <p><strong>Response time:</strong> Within 4 hours daytime</p>
+    <p><strong>Weekly check-in:</strong> Every Friday 6 PM IST</p>
+    <div class="callout-important">
+      <p>You are the hospital's primary contact for ARICU. Technical issues from your team come to you first.</p>
+    </div>
+   </div>
+   <div class="page-number right">05</div>`,
+
+  `<div class="divider-page theme-doctor">
+    <div class="divider-bg">
+      <div class="divider-left">
+        <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M50,80 Q20,60 20,40 Q20,20 35,20 Q45,20 50,30 Q55,20 65,20 Q80,20 80,40 Q80,60 50,80 Z" fill="currentColor" opacity="0.2"/>
+          <path d="M50,80 Q20,60 20,40 Q20,20 35,20 Q45,20 50,30 Q55,20 65,20 Q80,20 80,40 Q80,60 50,80 Z" />
+          <rect x="44" y="38" width="12" height="22" fill="currentColor"/>
+          <rect x="36" y="46" width="28" height="6" fill="currentColor"/>
+        </svg>
       </div>
-      <div class="page-number left">10</div>
-    `
-  },
-
-  // PAGE 11 — NURSE CONTENT
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 03 / FOR NURSES</div>
-      <div class="page-content content-page theme-nurse-content">
-        <div class="content-eyebrow">— GUIDE 03</div>
-        <h2 class="content-title">For Nurses</h2>
-        <p class="content-intro">You are the most important user. Accurate vitals and observations make ARICU's AI work well. Every doctor depends on your timely entries.</p>
-
-        <h3>Step 1 — Login</h3>
-        <ol>
-          <li>Open <strong>aricu.easymedicalsolutions.in</strong></li>
-          <li>Login with email/password from WhatsApp</li>
-          <li>Change password from Account Settings</li>
-        </ol>
-
-        <h3>Step 2 — Home Screen</h3>
-        <ul>
-          <li>See all patients in your ICU</li>
-          <li>Each bed shows latest vitals and alerts</li>
-          <li>Click any bed to open</li>
-        </ul>
-
-        <h3>Step 3 — Enter Vitals (Most Important!)</h3>
-        <ol>
-          <li>Click <strong>+ New Vitals</strong></li>
-          <li>Enter: HR, BP, SpO₂, RR, Temp, Urine Output, GCS, Pain</li>
-          <li>Click Save</li>
-        </ol>
-        <p>Enter vitals every hour or per your ICU protocol. ARICU automatically calculates NEWS2, qSOFA, SOFA scores.</p>
+      <div class="divider-stripe"></div>
+      <div class="divider-right">
+        <div class="divider-eyebrow">— GUIDE 02</div>
+        <h2 class="divider-title">For<br/>Doctors</h2>
+        <p class="divider-subtitle">Round, decide, AI-assist, document. Make faster, safer ICU decisions while keeping clinical judgment yours.</p>
+        <svg class="divider-ecg" viewBox="0 0 400 50">
+          <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
+        </svg>
+        <div class="divider-cta">Detailed instructions follow →</div>
       </div>
-      <div class="page-number right">11</div>
-    `
-  },
+    </div>
+   </div>
+   <div class="page-number left">06</div>`,
 
-  // PAGE 12 — NURSE CONTENT (continued)
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header left">GUIDE 03 / FOR NURSES</div>
-      <div class="page-content content-page theme-nurse-content">
-        <h3>Step 4 — Intake / Output</h3>
-        <ol>
-          <li>Click <strong>+ New I/O</strong></li>
-          <li>Enter IV fluids, oral intake, urine, drains, vomitus, NG aspirate</li>
-          <li>Save</li>
-        </ol>
+  `<div class="page-mini-header right">GUIDE 02 / FOR DOCTORS</div>
+   <div class="page-content content-page theme-doctor-content">
+    <div class="content-eyebrow">— GUIDE 02</div>
+    <h2 class="content-title">For Doctors</h2>
+    <p class="content-intro">AI is decision support only. Your clinical judgment is final.</p>
+    <h3>Step 1 — Login</h3>
+    <ol>
+      <li>Open <strong>aricu.easymedicalsolutions.in</strong> on phone or laptop</li>
+      <li>Login with email/password from WhatsApp</li>
+      <li>Change password from Account Settings</li>
+    </ol>
+    <h3>Step 2 — Round Mode</h3>
+    <p>See all ICU patients at one glance.</p>
+    <ul>
+      <li>Each bed: latest vitals, NEWS2, qSOFA, active alerts</li>
+      <li>Click any bed for full patient details</li>
+      <li>Alerts highlighted in red (critical) or orange (warning)</li>
+    </ul>
+    <h3>Step 3 — Open a Patient</h3>
+    <ul>
+      <li>Full clinical history</li>
+      <li>Current vitals (entered by nurses)</li>
+      <li>Latest labs and ABG</li>
+      <li>Active alerts and protocols</li>
+    </ul>
+   </div>
+   <div class="page-number right">07</div>`,
 
-        <h3>Step 5 — Labs and ABG</h3>
-        <p>When lab results return:</p>
-        <ul>
-          <li>Click <strong>+ Add Lab</strong> — enter Hb, WBC, electrolytes, creatinine, lactate</li>
-        </ul>
-        <p>For ABG:</p>
-        <ul>
-          <li>Click <strong>+ New ABG</strong> — pH, pCO₂, pO₂, HCO₃, lactate, FiO₂</li>
-        </ul>
-
-        <h3>Step 6 — Acknowledge Orders</h3>
-        <ul>
-          <li>New order appears with "Pending nurse acknowledgment"</li>
-          <li>Once administered, click <strong>Acknowledge</strong></li>
-          <li>Time + your name logged automatically</li>
-        </ul>
-
-        <h3>Step 7 — Respond to Alerts</h3>
-        <ol>
-          <li>Read the suggested protocol</li>
-          <li><strong>Inform the doctor immediately</strong></li>
-          <li>Take action as ordered</li>
-          <li>Click Acknowledge once action taken</li>
-        </ol>
-
-        <h3>Step 8 — Nursing Notes</h3>
-        <ul>
-          <li>Click <strong>Nursing Note</strong></li>
-          <li>Add: behavior, pain, mobility, family, skin</li>
-          <li>Save</li>
-        </ul>
-
-        <div class="callout-important">
-          <p>If you see sudden change (BP drop, consciousness change, breathing difficulty) — INFORM DOCTOR FIRST, then enter in ARICU.</p>
-        </div>
+  `<div class="page-mini-header left">GUIDE 02 / FOR DOCTORS</div>
+   <div class="page-content content-page theme-doctor-content">
+    <h3>Step 4 — Use AI Tools</h3>
+    <p>On any patient page, use these AI features:</p>
+    <div class="tool-list">
+      <div class="tool-item">
+        <div class="tool-name">AI Senior Consultant <span class="credit-cost">9 credits</span></div>
+        <div class="tool-desc">Full 21-section analysis. 50-60 sec. Indian brand names.</div>
       </div>
-      <div class="page-number left">12</div>
-    `
-  },
-
-  // PAGE 13 — NURSE CONTENT (Support)
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 03 / FOR NURSES</div>
-      <div class="page-content content-page theme-nurse-content">
-        <h3>Important Reminders</h3>
-        <ul>
-          <li>Always enter vitals on time — AI uses your data</li>
-          <li>All entries logged with your name and time</li>
-          <li>Mistakes can be edited within 1 hour</li>
-          <li>Never skip vitals just because patient looks stable — AI uses trends</li>
-        </ul>
-
-        <h3>Quick Reference</h3>
-        <ul>
-          <li><strong>Vitals every hour</strong> for unstable, every 4 hr for stable</li>
-          <li><strong>I/O</strong> at end of every shift minimum</li>
-          <li><strong>ABG</strong> as ordered or with sudden change</li>
-          <li><strong>Nursing notes</strong> every shift handover</li>
-        </ul>
-
-        <h3>Support</h3>
-        <p><strong>First contact:</strong> Your hospital admin</p>
-        <p>Hospital admin will escalate to Dr. Atul (+91 7013211742) if needed</p>
-
-        <div class="callout-important">
-          <p>Thank you for being the foundation of ARICU. Every alert that saves a life comes from a nurse who entered the vital that made it possible.</p>
-        </div>
+      <div class="tool-item">
+        <div class="tool-name">AI Resident <span class="credit-cost">3 credits</span></div>
+        <div class="tool-desc">Auto-reviews at 2/4/6/8/12 hr intervals.</div>
       </div>
-      <div class="page-number right">13</div>
-    `
-  },
-
-  // PAGE 14 — PROFESSOR DIVIDER
-  {
-    type: 'divider',
-    html: `
-      <div class="divider-page theme-professor">
-        <div class="divider-bg">
-          <div class="divider-left">
-            <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-              <path d="M20,40 L50,25 L80,40 L50,55 Z" fill="currentColor"/>
-              <path d="M30,42 L30,60 Q30,72 50,72 Q70,72 70,60 L70,42"/>
-              <line x1="80" y1="40" x2="80" y2="55"/>
-              <circle cx="80" cy="58" r="2" fill="currentColor"/>
-              <line x1="80" y1="55" x2="78" y2="60"/>
-              <line x1="80" y1="55" x2="82" y2="60"/>
-            </svg>
-          </div>
-          <div class="divider-stripe"></div>
-          <div class="divider-right">
-            <div class="divider-eyebrow">— GUIDE 04</div>
-            <h2 class="divider-title">For<br/>Professors</h2>
-            <p class="divider-subtitle">Teach, contribute cases, build protocols. Your expertise trains ARICU and benefits hospitals across India.</p>
-            <svg class="divider-ecg" viewBox="0 0 400 50">
-              <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
-            </svg>
-            <div class="divider-cta">Detailed instructions follow →</div>
-          </div>
-        </div>
+      <div class="tool-item">
+        <div class="tool-name">Differential <span class="credit-cost">5 credits</span></div>
+        <div class="tool-desc">Type chief complaint, get differential with reasoning.</div>
       </div>
-      <div class="page-number left">14</div>
-    `
-  },
-
-  // PAGE 15 — PROFESSOR CONTENT
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header right">GUIDE 04 / FOR PROFESSORS</div>
-      <div class="page-content content-page theme-professor-content">
-        <div class="content-eyebrow">— GUIDE 04</div>
-        <h2 class="content-title">For Professors</h2>
-        <p class="content-intro">You contribute clinical cases and protocols. Your expertise trains ARICU and benefits hospitals across India.</p>
-
-        <h3>Step 1 — Login</h3>
-        <ol>
-          <li>Open <strong>aricu.easymedicalsolutions.in</strong></li>
-          <li>Login with email/password from WhatsApp</li>
-          <li>Change password from Account Settings</li>
-        </ol>
-
-        <h3>Step 2 — Submit a Clinical Case</h3>
-        <p>Go to <strong>Professor Dashboard → Submit Case</strong></p>
-        <ul>
-          <li>Case title</li>
-          <li>Anonymized patient details (no names, no MRN)</li>
-          <li>Clinical scenario</li>
-          <li>Investigations performed</li>
-          <li>Your management approach</li>
-          <li>Outcome</li>
-          <li>Key teaching points</li>
-          <li>Submit → goes for editorial review</li>
-        </ul>
-
-        <h3>Step 3 — Submit a Protocol</h3>
-        <p>Go to <strong>Professor Dashboard → Submit Protocol</strong></p>
-        <ul>
-          <li>Protocol name (e.g., "Sepsis Resuscitation — Our Hospital Version")</li>
-          <li>Indication, inclusion/exclusion criteria</li>
-          <li>Step-by-step protocol</li>
-          <li>Monitoring parameters and endpoints</li>
-          <li>References (papers, SSC guidelines, etc.)</li>
-          <li>Attach PDF reference if available</li>
-        </ul>
+      <div class="tool-item">
+        <div class="tool-name">Treatment Plan <span class="credit-cost">5 credits</span></div>
+        <div class="tool-desc">Type diagnosis, get Indian brands + renal-adjusted dosing.</div>
       </div>
-      <div class="page-number right">15</div>
-    `
-  },
-
-  // PAGE 16 — PROFESSOR CONTENT + SUPPORT
-  {
-    type: 'content',
-    html: `
-      <div class="page-mini-header left">GUIDE 04 / FOR PROFESSORS</div>
-      <div class="page-content content-page theme-professor-content">
-        <h3>Step 4 — Review Submissions</h3>
-        <ul>
-          <li>See all contributions in Professor Dashboard</li>
-          <li>Status: Pending Review / Approved / Published</li>
-          <li>Edit before final approval</li>
-        </ul>
-
-        <h3>Step 5 — Browse Library</h3>
-        <ul>
-          <li>Browse cases from other professors</li>
-          <li>Browse protocols by specialty</li>
-          <li>Use as teaching material in rounds</li>
-        </ul>
-
-        <h3>Step 6 — Clinical Use</h3>
-        <p>Professors can also use all clinical features:</p>
-        <ul>
-          <li>View patients in your hospital</li>
-          <li>Use AI Senior Consultant on real cases</li>
-          <li>Add teaching notes on cases</li>
-          <li>Generate Deep Reasoning for complex educational cases</li>
-        </ul>
-
-        <h3>Important Rules</h3>
-        <div class="callout-important">
-          <p>Always anonymize patient data before submitting cases. Get patient consent if submitting identifiable details.</p>
-        </div>
-        <ul>
-          <li>Cite all sources for protocols</li>
-          <li>Contributions credited under your name</li>
-          <li>Editorial review before publication</li>
-        </ul>
-
-        <h3>Support</h3>
-        <p><strong>WhatsApp Dr. Atul:</strong> +91 7013211742</p>
+      <div class="tool-item">
+        <div class="tool-name">Counseling Script <span class="credit-cost">2 credits</span></div>
+        <div class="tool-desc">Family counseling in simple language.</div>
       </div>
-      <div class="page-number left">16</div>
-    `
-  },
-
-  // PAGE 17 — THANK YOU
-  {
-    type: 'thanks',
-    html: `
-      <div class="thank-you-page">
-        <div class="ty-eyebrow">— FOUNDING PARTNER</div>
-        <h2>Thank you for joining our pilot.</h2>
-        <p>Together we are building India's first AI-powered ICU command center.</p>
-        <p>Every alert that catches a critical finding, every minute saved at the bedside, every life-supporting decision made faster — that's our shared work.</p>
-
-        <div class="ty-signature">
-          <div class="ty-name">Dr. Atul Rai</div>
-          <div class="ty-cred">M.D. PHYSICIAN · INTENSIVIST</div>
-          <div class="ty-contact">Easy Medical Solutions · Hyderabad · +91 7013211742</div>
-        </div>
+      <div class="tool-item">
+        <div class="tool-name">Deep Reasoning <span class="credit-cost">15 credits</span></div>
+        <div class="tool-desc">Premium AI for complex cases. 5-10 min wait.</div>
       </div>
-      <div class="page-number right">17</div>
-    `
-  }
+    </div>
+   </div>
+   <div class="page-number left">08</div>`,
+
+  `<div class="page-mini-header right">GUIDE 02 / FOR DOCTORS</div>
+   <div class="page-content content-page theme-doctor-content">
+    <h3>Step 5 — Order Medications</h3>
+    <ol>
+      <li>Click <strong>+ New Order</strong></li>
+      <li>Type medication, dose, route, frequency</li>
+      <li>Save — nurse acknowledges at bedside</li>
+    </ol>
+    <h3>Step 6 — Daily Doctor Note</h3>
+    <ul>
+      <li>Open patient → Add today's impression, assessment, plan</li>
+      <li>Save — visible to entire team</li>
+    </ul>
+    <h3>Step 7 — Discharge Patient</h3>
+    <ol>
+      <li>Click <strong>Discharge Patient</strong></li>
+      <li>Click <strong>AI Discharge Summary</strong> — auto-generated</li>
+      <li>Review, edit, finalize</li>
+    </ol>
+    <h3>Important Rules</h3>
+    <div class="callout-important">
+      <p>AI is decision support, not decision making. Always verify against your clinical judgment.</p>
+    </div>
+    <ul>
+      <li>Every action logged for audit</li>
+      <li>Data on Indian servers (Mumbai)</li>
+      <li>NABH-ready, DPDP compliant</li>
+    </ul>
+   </div>
+   <div class="page-number right">09</div>`,
+
+  `<div class="divider-page theme-nurse">
+    <div class="divider-bg">
+      <div class="divider-left">
+        <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+          <circle cx="30" cy="20" r="6" fill="currentColor"/>
+          <circle cx="70" cy="20" r="6" fill="currentColor"/>
+          <path d="M30,26 Q30,40 50,55 Q70,40 70,26" />
+          <circle cx="50" cy="75" r="14" fill="currentColor" fill-opacity="0.2"/>
+          <circle cx="50" cy="75" r="14" />
+          <circle cx="50" cy="75" r="6" fill="currentColor"/>
+          <line x1="50" y1="55" x2="50" y2="61"/>
+        </svg>
+      </div>
+      <div class="divider-stripe"></div>
+      <div class="divider-right">
+        <div class="divider-eyebrow">— GUIDE 03</div>
+        <h2 class="divider-title">For<br/>Nurses</h2>
+        <p class="divider-subtitle">Vitals, observation, alerts — the foundation. Your entries make every AI recommendation possible.</p>
+        <svg class="divider-ecg" viewBox="0 0 400 50">
+          <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
+        </svg>
+        <div class="divider-cta">Detailed instructions follow →</div>
+      </div>
+    </div>
+   </div>
+   <div class="page-number left">10</div>`,
+
+  `<div class="page-mini-header right">GUIDE 03 / FOR NURSES</div>
+   <div class="page-content content-page theme-nurse-content">
+    <div class="content-eyebrow">— GUIDE 03</div>
+    <h2 class="content-title">For Nurses</h2>
+    <p class="content-intro">You are the most important user. Accurate vitals make ARICU's AI work.</p>
+    <h3>Step 1 — Login</h3>
+    <ol>
+      <li>Open <strong>aricu.easymedicalsolutions.in</strong></li>
+      <li>Login with email/password from WhatsApp</li>
+      <li>Change password</li>
+    </ol>
+    <h3>Step 2 — Home Screen</h3>
+    <ul>
+      <li>See all patients in your ICU</li>
+      <li>Each bed shows latest vitals and alerts</li>
+      <li>Click any bed to open</li>
+    </ul>
+    <h3>Step 3 — Enter Vitals (Most Important!)</h3>
+    <ol>
+      <li>Click <strong>+ New Vitals</strong></li>
+      <li>Enter HR, BP, SpO₂, RR, Temp, Urine Output, GCS, Pain</li>
+      <li>Click Save</li>
+    </ol>
+    <p>Every hour or per ICU protocol. ARICU auto-calculates scores.</p>
+   </div>
+   <div class="page-number right">11</div>`,
+
+  `<div class="page-mini-header left">GUIDE 03 / FOR NURSES</div>
+   <div class="page-content content-page theme-nurse-content">
+    <h3>Step 4 — Intake / Output</h3>
+    <ol>
+      <li>Click <strong>+ New I/O</strong></li>
+      <li>Enter IV fluids, oral, urine, drains, vomitus, NG</li>
+      <li>Save</li>
+    </ol>
+    <h3>Step 5 — Labs and ABG</h3>
+    <ul>
+      <li><strong>+ Add Lab:</strong> Hb, WBC, electrolytes, creatinine, lactate</li>
+      <li><strong>+ New ABG:</strong> pH, pCO₂, pO₂, HCO₃, lactate, FiO₂</li>
+    </ul>
+    <h3>Step 6 — Acknowledge Orders</h3>
+    <ul>
+      <li>New order shows "Pending nurse acknowledgment"</li>
+      <li>After administering, click <strong>Acknowledge</strong></li>
+      <li>Time + your name logged automatically</li>
+    </ul>
+    <h3>Step 7 — Respond to Alerts</h3>
+    <ol>
+      <li>Read suggested protocol</li>
+      <li><strong>Inform doctor immediately</strong></li>
+      <li>Take action as ordered</li>
+      <li>Click Acknowledge once action taken</li>
+    </ol>
+    <h3>Step 8 — Nursing Notes</h3>
+    <ul>
+      <li>Click <strong>Nursing Note</strong></li>
+      <li>Add: behavior, pain, mobility, family, skin</li>
+    </ul>
+    <div class="callout-important">
+      <p>Sudden change? INFORM DOCTOR FIRST, then enter in ARICU.</p>
+    </div>
+   </div>
+   <div class="page-number left">12</div>`,
+
+  `<div class="page-mini-header right">GUIDE 03 / FOR NURSES</div>
+   <div class="page-content content-page theme-nurse-content">
+    <h3>Important Reminders</h3>
+    <ul>
+      <li>Enter vitals on time — AI uses your data</li>
+      <li>All entries logged with your name and time</li>
+      <li>Mistakes can be edited within 1 hour</li>
+      <li>Never skip vitals — AI uses trends</li>
+    </ul>
+    <h3>Quick Reference</h3>
+    <ul>
+      <li><strong>Vitals:</strong> every hour (unstable), every 4 hr (stable)</li>
+      <li><strong>I/O:</strong> end of every shift minimum</li>
+      <li><strong>ABG:</strong> as ordered or with sudden change</li>
+      <li><strong>Notes:</strong> every shift handover</li>
+    </ul>
+    <h3>Support</h3>
+    <p><strong>First contact:</strong> Your hospital admin</p>
+    <p>Hospital admin escalates to Dr. Atul (+91 7013211742) if needed.</p>
+    <div class="callout-important">
+      <p>Thank you for being the foundation of ARICU. Every alert that saves a life starts with a nurse who entered the vital.</p>
+    </div>
+   </div>
+   <div class="page-number right">13</div>`,
+
+  `<div class="divider-page theme-professor">
+    <div class="divider-bg">
+      <div class="divider-left">
+        <svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M20,40 L50,25 L80,40 L50,55 Z" fill="currentColor"/>
+          <path d="M30,42 L30,60 Q30,72 50,72 Q70,72 70,60 L70,42"/>
+          <line x1="80" y1="40" x2="80" y2="55"/>
+          <circle cx="80" cy="58" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="divider-stripe"></div>
+      <div class="divider-right">
+        <div class="divider-eyebrow">— GUIDE 04</div>
+        <h2 class="divider-title">For<br/>Professors</h2>
+        <p class="divider-subtitle">Teach, contribute cases, build protocols. Your expertise trains ARICU and benefits hospitals across India.</p>
+        <svg class="divider-ecg" viewBox="0 0 400 50">
+          <path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" />
+        </svg>
+        <div class="divider-cta">Detailed instructions follow →</div>
+      </div>
+    </div>
+   </div>
+   <div class="page-number left">14</div>`,
+
+  `<div class="page-mini-header right">GUIDE 04 / FOR PROFESSORS</div>
+   <div class="page-content content-page theme-professor-content">
+    <div class="content-eyebrow">— GUIDE 04</div>
+    <h2 class="content-title">For Professors</h2>
+    <p class="content-intro">Contribute clinical cases and protocols. Your expertise trains ARICU.</p>
+    <h3>Step 1 — Login</h3>
+    <ol>
+      <li>Open <strong>aricu.easymedicalsolutions.in</strong></li>
+      <li>Login with email/password from WhatsApp</li>
+      <li>Change password</li>
+    </ol>
+    <h3>Step 2 — Submit a Clinical Case</h3>
+    <p>Go to <strong>Professor Dashboard → Submit Case</strong></p>
+    <ul>
+      <li>Case title</li>
+      <li>Anonymized patient details (no names, no MRN)</li>
+      <li>Clinical scenario + investigations</li>
+      <li>Your management approach</li>
+      <li>Outcome + teaching points</li>
+      <li>Submit → editorial review</li>
+    </ul>
+    <h3>Step 3 — Submit a Protocol</h3>
+    <p>Go to <strong>Professor Dashboard → Submit Protocol</strong></p>
+    <ul>
+      <li>Protocol name + indication</li>
+      <li>Inclusion/exclusion criteria</li>
+      <li>Step-by-step procedure</li>
+      <li>Monitoring + endpoints</li>
+      <li>References (SSC, papers)</li>
+    </ul>
+   </div>
+   <div class="page-number right">15</div>`,
+
+  `<div class="page-mini-header left">GUIDE 04 / FOR PROFESSORS</div>
+   <div class="page-content content-page theme-professor-content">
+    <h3>Step 4 — Review Submissions</h3>
+    <ul>
+      <li>See contributions in Professor Dashboard</li>
+      <li>Status: Pending Review / Approved / Published</li>
+      <li>Edit before final approval</li>
+    </ul>
+    <h3>Step 5 — Browse Library</h3>
+    <ul>
+      <li>Browse cases from other professors</li>
+      <li>Browse protocols by specialty</li>
+      <li>Use as teaching material in rounds</li>
+    </ul>
+    <h3>Step 6 — Clinical Use</h3>
+    <p>Professors can also:</p>
+    <ul>
+      <li>View patients in your hospital</li>
+      <li>Use AI Senior Consultant on real cases</li>
+      <li>Add teaching notes</li>
+      <li>Generate Deep Reasoning for complex cases</li>
+    </ul>
+    <h3>Important Rules</h3>
+    <div class="callout-important">
+      <p>Always anonymize patient data before submitting. Get patient consent if identifiable.</p>
+    </div>
+    <ul>
+      <li>Cite all sources for protocols</li>
+      <li>Contributions credited under your name</li>
+      <li>Editorial review before publication</li>
+    </ul>
+    <h3>Support</h3>
+    <p><strong>WhatsApp Dr. Atul:</strong> +91 7013211742</p>
+   </div>
+   <div class="page-number left">16</div>`,
+
+  `<div class="thank-you-page">
+    <div class="ty-eyebrow">— FOUNDING PARTNER</div>
+    <h2>Thank you for joining our pilot.</h2>
+    <p>Together we are building India's first AI-powered ICU command center.</p>
+    <p>Every alert that catches a critical finding, every minute saved at the bedside, every life-supporting decision made faster — that's our shared work.</p>
+    <div class="ty-signature">
+      <div class="ty-name">Dr. Atul Rai</div>
+      <div class="ty-cred">M.D. PHYSICIAN · INTENSIVIST</div>
+      <div class="ty-contact">Easy Medical Solutions · Hyderabad · +91 7013211742</div>
+    </div>
+   </div>`,
 ];
 
-// ────────────────────────────────────────────────────────────
-// FLIPBOOK ENGINE
-// ────────────────────────────────────────────────────────────
-class Flipbook {
-  constructor() {
-    this.currentPage = 0;
-    this.totalPages = PAGES.length;
-    this.book = document.getElementById('book');
-    this.pageIndicator = document.getElementById('pageIndicator');
-    this.progressFill = document.getElementById('progressFill');
-    this.firstBtn = document.getElementById('firstBtn');
-    this.prevBtn = document.getElementById('prevBtn');
-    this.nextBtn = document.getElementById('nextBtn');
-    this.lastBtn = document.getElementById('lastBtn');
-
-    this.isMobile = window.matchMedia('(max-width: 768px)').matches;
-    this.isAnimating = false;
-
-    this.init();
-  }
-
-  init() {
-    this.renderPages();
-    this.bindEvents();
-    this.updateView();
-
-    // Hide loader after a beat
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-    }, 600);
-  }
-
-  renderPages() {
-    this.book.innerHTML = '';
-
-    if (this.isMobile) {
-      // Mobile: single page view, all pages stacked
-      PAGES.forEach((page, i) => {
-        const pageEl = document.createElement('div');
-        pageEl.className = `page left`;
-        pageEl.dataset.index = i;
-        pageEl.innerHTML = `
-          <div class="page-face front">
-            ${page.html}
-          </div>
-        `;
-        pageEl.style.zIndex = this.totalPages - i;
-        if (i !== 0) pageEl.classList.add('hidden');
-        this.book.appendChild(pageEl);
-      });
-    } else {
-      // Desktop: spread view (two pages side by side)
-      // We'll render one "spread" at a time, replacing on flip
-      for (let i = 0; i < this.totalPages; i++) {
-        const pageEl = document.createElement('div');
-        const isRight = i % 2 === 0; // page 0 (cover) goes right, then left/right alternate? Actually:
-        // Conventional book: page 0 = cover (right-side first time you see it)
-        // page 1 = inside-left, page 2 = inside-right, etc.
-        // For simplicity: even indices on right, odd on left
-        pageEl.className = `page ${i % 2 === 0 ? 'right' : 'left'}`;
-        pageEl.dataset.index = i;
-        pageEl.innerHTML = `
-          <div class="page-face front">${PAGES[i].html}</div>
-        `;
-        pageEl.style.zIndex = this.totalPages - Math.abs(i - this.currentPage);
-
-        if (i < this.currentPage - 1 || i > this.currentPage + 1) {
-          pageEl.classList.add('hidden');
-        }
-
-        this.book.appendChild(pageEl);
-      }
-    }
-  }
-
-  bindEvents() {
-    this.firstBtn.addEventListener('click', () => this.goTo(0));
-    this.prevBtn.addEventListener('click', () => this.prev());
-    this.nextBtn.addEventListener('click', () => this.next());
-    this.lastBtn.addEventListener('click', () => this.goTo(this.totalPages - 1));
-
-    // TOC entries
-    document.addEventListener('click', (e) => {
-      const entry = e.target.closest('.toc-entry');
-      if (entry) {
-        const target = parseInt(entry.dataset.target, 10);
-        this.goTo(target);
-      }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        this.next();
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        this.prev();
-      } else if (e.key === 'Home') {
-        this.goTo(0);
-      } else if (e.key === 'End') {
-        this.goTo(this.totalPages - 1);
-      }
-    });
-
-    // Touch swipe
-    let touchStartX = 0;
-    let touchStartY = 0;
-    this.book.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    this.book.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      const dy = e.changedTouches[0].clientY - touchStartY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-        if (dx > 0) this.prev();
-        else this.next();
-      }
-    }, { passive: true });
-
-    // Click to flip (click on page edge)
-    this.book.addEventListener('click', (e) => {
-      if (e.target.closest('.toc-entry')) return;
-      if (e.target.closest('button')) return;
-      const rect = this.book.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const width = rect.width;
-      if (this.isMobile) {
-        if (clickX > width / 2) this.next();
-        else this.prev();
-      } else {
-        if (clickX > width * 0.65) this.next();
-        else if (clickX < width * 0.35) this.prev();
-      }
-    });
-
-    // Resize handler
-    window.addEventListener('resize', () => {
-      const wasMobile = this.isMobile;
-      this.isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (wasMobile !== this.isMobile) {
-        this.renderPages();
-        this.updateView();
-      }
-    });
-  }
-
-  next() {
-    if (this.isAnimating) return;
-    if (this.currentPage < this.totalPages - 1) {
-      this.goTo(this.currentPage + 1);
-    }
-  }
-
-  prev() {
-    if (this.isAnimating) return;
-    if (this.currentPage > 0) {
-      this.goTo(this.currentPage - 1);
-    }
-  }
-
-  goTo(index) {
-    if (this.isAnimating) return;
-    if (index < 0 || index >= this.totalPages) return;
-    if (index === this.currentPage) return;
-
-    this.isAnimating = true;
-    this.currentPage = index;
-    this.updateView();
-
-    setTimeout(() => {
-      this.isAnimating = false;
-    }, 600);
-  }
-
-  updateView() {
-    // Update page visibility (show current + neighbors for performance)
-    const allPages = this.book.querySelectorAll('.page');
-    allPages.forEach(p => {
-      const i = parseInt(p.dataset.index, 10);
-      if (Math.abs(i - this.currentPage) <= 2) {
-        p.classList.remove('hidden');
-      } else {
-        p.classList.add('hidden');
-      }
-      // Z-index management
-      p.style.zIndex = this.totalPages - Math.abs(i - this.currentPage);
-    });
-
-    // Indicator
-    const num = String(this.currentPage + 1).padStart(2, '0');
-    const total = String(this.totalPages).padStart(2, '0');
-    this.pageIndicator.textContent = `${num} / ${total}`;
-
-    // Progress bar
-    const pct = ((this.currentPage + 1) / this.totalPages) * 100;
-    this.progressFill.style.width = pct + '%';
-
-    // Buttons
-    this.prevBtn.disabled = this.currentPage === 0;
-    this.firstBtn.disabled = this.currentPage === 0;
-    this.nextBtn.disabled = this.currentPage === this.totalPages - 1;
-    this.lastBtn.disabled = this.currentPage === this.totalPages - 1;
-  }
-}
-
-// Boot
 document.addEventListener('DOMContentLoaded', () => {
-  new Flipbook();
+  const bookEl = document.getElementById('book');
+
+  PAGES_HTML.forEach((html) => {
+    const page = document.createElement('div');
+    page.className = 'flip-page';
+    page.innerHTML = html;
+    bookEl.appendChild(page);
+  });
+
+  function getBookDims() {
+    const stageHeight = window.innerHeight - 60 - 80;
+    const stageWidth = window.innerWidth;
+    const isMobile = window.innerWidth < 768;
+
+    let pageHeight, pageWidth;
+    if (isMobile) {
+      pageHeight = Math.min(stageHeight - 30, 720);
+      pageWidth = Math.min(stageWidth - 30, pageHeight * 0.7);
+    } else {
+      pageHeight = Math.min(stageHeight - 40, 780);
+      pageWidth = Math.min((stageWidth - 60) / 2, pageHeight * 0.72);
+    }
+
+    return { width: pageWidth, height: pageHeight, isMobile };
+  }
+
+  const dims = getBookDims();
+
+  const pageFlip = new St.PageFlip(bookEl, {
+    width: dims.width,
+    height: dims.height,
+    size: 'fixed',
+    minWidth: 280,
+    maxWidth: 700,
+    minHeight: 400,
+    maxHeight: 900,
+    maxShadowOpacity: 0.5,
+    showCover: true,
+    mobileScrollSupport: false,
+    swipeDistance: 30,
+    clickEventForward: true,
+    useMouseEvents: true,
+    drawShadow: true,
+    flippingTime: 800,
+    usePortrait: dims.isMobile,
+    autoSize: false,
+  });
+
+  pageFlip.loadFromHTML(document.querySelectorAll('.flip-page'));
+
+  const pageIndicator = document.getElementById('pageIndicator');
+  const progressFill = document.getElementById('progressFill');
+  const firstBtn = document.getElementById('firstBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const lastBtn = document.getElementById('lastBtn');
+
+  function updateChrome() {
+    const current = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    pageIndicator.textContent = `${String(current + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+    progressFill.style.width = `${((current + 1) / total) * 100}%`;
+    prevBtn.disabled = current === 0;
+    firstBtn.disabled = current === 0;
+    nextBtn.disabled = current >= total - 1;
+    lastBtn.disabled = current >= total - 1;
+  }
+
+  pageFlip.on('flip', updateChrome);
+  pageFlip.on('init', updateChrome);
+
+  firstBtn.addEventListener('click', () => pageFlip.turnToPage(0));
+  prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+  nextBtn.addEventListener('click', () => pageFlip.flipNext());
+  lastBtn.addEventListener('click', () => pageFlip.turnToPage(pageFlip.getPageCount() - 1));
+
+  document.addEventListener('click', (e) => {
+    const entry = e.target.closest('.toc-entry');
+    if (entry) {
+      const target = parseInt(entry.dataset.target, 10);
+      pageFlip.flip(target);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      pageFlip.flipNext();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      pageFlip.flipPrev();
+    } else if (e.key === 'Home') {
+      pageFlip.turnToPage(0);
+    } else if (e.key === 'End') {
+      pageFlip.turnToPage(pageFlip.getPageCount() - 1);
+    }
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const newDims = getBookDims();
+      pageFlip.update({
+        width: newDims.width,
+        height: newDims.height,
+        usePortrait: newDims.isMobile,
+      });
+    }, 200);
+  });
+
+  updateChrome();
+
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 800);
 });
 </script>
 
