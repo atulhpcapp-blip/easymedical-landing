@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why ARICU — The Only ICU AI Built for India</title>
+  <meta name="description" content="Why ARICU is the only ICU intelligence built for Indian hospitals. The two-layer moat: AI that gets smarter for your hospital, and Indian clinical intelligence as the default. By Dr. Atul Rai, M.D.">
+  <meta property="og:title" content="Why ARICU — The Only ICU AI Built for India">
+  <meta property="og:description" content="Built by a 23-year practicing intensivist. Indian clinical intelligence as the default, not a setting.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-900: #0A1628;
+      --navy-800: #142441;
+      --navy-700: #1B2D4E;
+      --navy-500: #2A4574;
+      --green-700: #047857;
+      --green-500: #10B981;
+      --green-300: #6EE7B7;
+      --green-glow: rgba(16, 185, 129, 0.15);
+      --cream: #FAF7F2;
+      --paper: #F5F1EA;
+      --grey-200: #E5E3DF;
+      --grey-400: #9CA3AF;
+      --grey-600: #4B5563;
+      --grey-800: #1F2937;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter Tight', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--grey-800);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Top editorial bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy-900);
+      color: var(--cream);
+      padding: 14px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--navy-700);
+    }
+    .top-bar a { color: inherit; text-decoration: none; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+    .top-bar a:hover { opacity: 1; color: var(--green-300); }
+    .top-bar-nav { display: flex; gap: 28px; }
+    .top-bar-brand { font-weight: 600; letter-spacing: 0.3em; opacity: 1; color: var(--cream); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy-900);
+      color: var(--cream);
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 32px 120px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(16, 185, 129, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 25%; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, var(--green-glow), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 40px;
+      display: flex; align-items: center; gap: 18px;
+      animation: fadeUp 0.8s 0.1s both;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 48px; height: 1px; background: var(--green-500);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(46px, 8vw, 128px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      max-width: 1100px;
+      margin-bottom: 52px;
+      font-feature-settings: "ss01", "ss02";
+      animation: fadeUp 1s 0.2s both;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--green-300);
+      font-weight: 400;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 1.6vw, 23px);
+      max-width: 760px;
+      color: rgba(250, 247, 242, 0.78);
+      font-weight: 300;
+      line-height: 1.5;
+      animation: fadeUp 1s 0.4s both;
+    }
+    .hero-meta {
+      margin-top: 88px;
+      display: flex;
+      gap: 48px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.6s both;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 12px; }
+    .hero-meta span::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section base */
+    .section {
+      padding: 140px 32px;
+      position: relative;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--green-700);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .section-num::before {
+      content: ''; width: 48px; height: 1px; background: var(--green-700);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(36px, 5vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      max-width: 980px;
+      margin-bottom: 44px;
+      color: var(--navy-900);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--green-700);
+      font-weight: 400;
+    }
+    .section-lead {
+      font-size: clamp(17px, 1.4vw, 21px);
+      max-width: 760px;
+      color: var(--grey-600);
+      line-height: 1.65;
+    }
+
+    /* SECTION 01: THESIS (cream) */
+    .section--thesis { background: var(--cream); }
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+      margin-top: 96px;
+    }
+    .thesis-column h3 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--grey-600);
+      margin-bottom: 28px;
+    }
+    .thesis-column ul { list-style: none; }
+    .thesis-column li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--grey-200);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .thesis-column li:last-child { border-bottom: none; }
+    .thesis-column--western li {
+      color: var(--grey-600);
+      opacity: 0.7;
+      text-decoration: line-through;
+      text-decoration-color: rgba(0,0,0,0.15);
+    }
+    .thesis-column--indian li {
+      color: var(--navy-900);
+      font-weight: 500;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .thesis-column--indian li::before {
+      content: '→';
+      color: var(--green-700);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* SECTION 02: MOAT (navy) */
+    .section--moat {
+      background: var(--navy-900);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .section--moat::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .section--moat > * { position: relative; z-index: 2; }
+    .section--moat .section-num { color: var(--green-300); }
+    .section--moat .section-num::before { background: var(--green-500); }
+    .section--moat .section-title { color: var(--cream); }
+    .section--moat .section-title em { color: var(--green-300); }
+    .section--moat .section-lead { color: rgba(250, 247, 242, 0.72); }
+
+    .moat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      margin-top: 96px;
+    }
+    .layer-card {
+      background: var(--navy-800);
+      border: 1px solid var(--navy-700);
+      padding: 56px 48px;
+      position: relative;
+      transition: transform 0.35s ease, border-color 0.35s ease;
+    }
+    .layer-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--green-500);
+    }
+    .layer-num {
+      font-family: var(--font-display);
+      font-size: 104px;
+      line-height: 1;
+      color: var(--green-500);
+      font-weight: 300;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    .layer-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 20px;
+    }
+    .layer-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 500;
+      line-height: 1.12;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+    .layer-body {
+      font-size: 16px;
+      color: rgba(250, 247, 242, 0.78);
+      line-height: 1.65;
+    }
+    .layer-body strong { color: var(--cream); font-weight: 500; }
+
+    /* SECTION 03: PILLARS (paper) */
+    .section--pillars { background: var(--paper); }
+    .pillars-list { margin-top: 88px; }
+    .pillar {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 56px;
+      padding: 56px 0;
+      border-top: 1px solid var(--grey-200);
+    }
+    .pillar:last-child { border-bottom: 1px solid var(--grey-200); }
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 96px;
+      line-height: 1;
+      color: var(--green-700);
+      font-weight: 400;
+      font-style: italic;
+    }
+    .pillar-content h3 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 2.6vw, 36px);
+      font-weight: 500;
+      color: var(--navy-900);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .pillar-content p {
+      font-size: 16px;
+      color: var(--grey-600);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .pillar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .pillar-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      background: white;
+      border: 1px solid var(--grey-200);
+      color: var(--grey-600);
+      border-radius: 2px;
+    }
+
+    /* SECTION 04: FOUNDER (navy) */
+    .section--founder {
+      background: var(--navy-900);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .section--founder::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--green-glow), transparent 65%);
+      pointer-events: none;
+    }
+    .section--founder > * { position: relative; z-index: 2; }
+    .section--founder .section-num { color: var(--green-300); }
+    .section--founder .section-num::before { background: var(--green-500); }
+    .section--founder .section-title { color: var(--cream); }
+    .section--founder .section-title em { color: var(--green-300); }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 96px;
+      align-items: start;
+      margin-top: 72px;
+    }
+    .founder-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 28px;
+    }
+    .founder-callout {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.2vw, 46px);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--cream);
+    }
+    .founder-callout em { color: var(--green-300); font-style: italic; font-weight: 400; }
+
+    .founder-body {
+      font-size: 17px;
+      color: rgba(250, 247, 242, 0.78);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .founder-body strong { color: var(--cream); font-weight: 500; }
+    .founder-creds {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .founder-cred {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      padding: 4px 0 4px 18px;
+      border-left: 2px solid var(--green-500);
+    }
+
+    /* SECTION 05: PULL QUOTE (green) */
+    .section--quote {
+      background: var(--green-700);
+      color: var(--cream);
+      padding: 160px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .section--quote::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(110, 231, 183, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 240px;
+      line-height: 0.7;
+      font-style: italic;
+      color: var(--green-300);
+      opacity: 0.35;
+      margin-bottom: -60px;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      max-width: 1150px;
+      color: var(--cream);
+      position: relative;
+      z-index: 2;
+    }
+    .quote-text em {
+      font-style: normal;
+      color: var(--green-300);
+      font-weight: 500;
+    }
+    .quote-attribution {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-top: 56px;
+      opacity: 0.75;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* SECTION 06: CTA */
+    .section--cta {
+      background: var(--cream);
+      padding: 140px 32px;
+    }
+    .cta-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 76px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--navy-900);
+      margin-bottom: 28px;
+    }
+    .cta-title em {
+      font-style: italic;
+      color: var(--green-700);
+      font-weight: 400;
+    }
+    .cta-sub {
+      font-size: 18px;
+      color: var(--grey-600);
+      max-width: 620px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 20px 40px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+      border: 1.5px solid transparent;
+    }
+    .btn--primary {
+      background: var(--navy-900);
+      color: var(--cream);
+      border-color: var(--navy-900);
+    }
+    .btn--primary:hover {
+      background: var(--green-700);
+      border-color: var(--green-700);
+      transform: translateY(-2px);
+    }
+    .btn--secondary {
+      background: transparent;
+      color: var(--navy-900);
+      border-color: var(--navy-900);
+    }
+    .btn--secondary:hover {
+      background: var(--navy-900);
+      color: var(--cream);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-900);
+      color: rgba(250, 247, 242, 0.55);
+      padding: 80px 32px 36px;
+      font-size: 14px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 56px;
+    }
+    footer h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 20px;
+    }
+    footer a {
+      color: rgba(250, 247, 242, 0.72);
+      text-decoration: none;
+      display: block;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--green-300); }
+    .footer-mark {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .footer-tagline {
+      line-height: 1.65;
+      max-width: 400px;
+    }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 64px auto 0;
+      padding-top: 36px;
+      border-top: 1px solid var(--navy-700);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .top-bar { padding: 12px 20px; font-size: 10px; }
+      .top-bar-nav { gap: 16px; }
+
+      .hero { padding: 60px 20px 80px; min-height: auto; }
+      .hero-headline { margin-bottom: 36px; }
+      .hero-sub { font-size: 17px; }
+      .hero-meta { gap: 20px; font-size: 10px; margin-top: 56px; }
+
+      .section { padding: 80px 20px; }
+      .section-title { margin-bottom: 32px; }
+
+      .thesis-grid, .moat-grid, .founder-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+
+      .layer-card { padding: 36px 28px; }
+      .layer-num { font-size: 80px; margin-bottom: 20px; }
+
+      .pillar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 40px 0;
+      }
+      .pillar-num { font-size: 64px; }
+
+      .quote-mark { font-size: 160px; margin-bottom: -40px; }
+      .section--quote { padding: 100px 20px; }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="/" class="top-bar-brand">ARICU</a>
+  <div class="top-bar-nav">
+    <a href="/aricu.html">Product</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/aricu-guide.html">User Guide</a>
+    <a href="/why-aricu.html" style="color: var(--green-300); opacity: 1;">Why ARICU</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">A Manifesto / Why ARICU</div>
+    <h1 class="hero-headline">
+      The only ICU intelligence <em>built for India,</em> by an Indian intensivist.
+    </h1>
+    <p class="hero-sub">
+      Global EMRs were built for Western patients with chronic disease. ARICU was built for the patient on Day 7 of dengue with platelets at 18,000 and the family asking about home discharge for a wedding. We don't treat Indian ICUs as edge cases. We treat them as the default.
+    </p>
+    <div class="hero-meta">
+      <span>Founded by Dr. Atul Rai · M.D.</span>
+      <span>23 years intensive care</span>
+      <span>10,000+ ICU patients</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 01: THESIS -->
+<section class="section section--thesis">
+  <div class="section-inner">
+    <div class="section-num reveal">01 · The Thesis</div>
+    <h2 class="section-title reveal">
+      Indian ICUs are not <em>edge cases.</em> They are the default.
+    </h2>
+    <p class="section-lead reveal">
+      Every global health AI product treats Indian patients as deviations from a Western norm. ARICU inverts that. The patient who walks in with dengue plus scrub typhus plus falciparum coinfection on Day 7 — the family asking about a wedding discharge — the tier-2 hospital lab without same-day procalcitonin — that's the patient ARICU was designed for from the start.
+    </p>
+
+    <div class="thesis-grid">
+      <div class="thesis-column thesis-column--western reveal">
+        <h3>What Western AI was built for</h3>
+        <ul>
+          <li>Single-diagnosis chronic disease</li>
+          <li>CHF, COPD, post-op recovery</li>
+          <li>Common infections: CAP, UTI, C. diff</li>
+          <li>Resource-rich settings, every test 24/7</li>
+          <li>English-only documentation</li>
+          <li>Individual patient decision-making</li>
+        </ul>
+      </div>
+      <div class="thesis-column thesis-column--indian reveal">
+        <h3>What Indian ICUs actually see</h3>
+        <ul>
+          <li>Dengue, scrub typhus, malaria, TB, leptospirosis</li>
+          <li>Coinfections as the rule, not exception</li>
+          <li>Tropical complications: DIC, MOF, blackwater fever</li>
+          <li>Tier-2 hospitals without 24/7 ABG or cultures</li>
+          <li>Multilingual nurses, code-switching doctors</li>
+          <li>Joint family decisions, religious sensitivities, DAMA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02: TWO-LAYER MOAT -->
+<section class="section section--moat">
+  <div class="section-inner">
+    <div class="section-num reveal">02 · The Moat</div>
+    <h2 class="section-title reveal">
+      Two layers. Both <em>compound monthly.</em>
+    </h2>
+    <p class="section-lead reveal">
+      ARICU's unmatched-product status doesn't come from a feature checklist. It comes from two architectural decisions that competitors cannot replicate in less than 18 months — and that strengthen the longer you use ARICU.
+    </p>
+
+    <div class="moat-grid">
+      <div class="layer-card reveal">
+        <div class="layer-num">01</div>
+        <div class="layer-label">The Intelligence Layer</div>
+        <h3 class="layer-title">The AI gets measurably smarter for your hospital, every month.</h3>
+        <p class="layer-body">
+          Every suggestion you accept or override teaches the system. After 6 months, ARICU is calibrated to <strong>your patient population</strong>, <strong>your antibiotic resistance patterns</strong>, <strong>your common presentations</strong>. After 12 months, no competitor can match what it knows about your ICU. Switching costs compound monthly. That's a moat global products will never have — because they don't have your patients.
+        </p>
+      </div>
+      <div class="layer-card reveal">
+        <div class="layer-num">02</div>
+        <div class="layer-label">The Clinical Layer</div>
+        <h3 class="layer-title">Indian clinical intelligence is the default, not a setting.</h3>
+        <p class="layer-body">
+          Dengue trajectory prediction. Scrub typhus + dengue coinfection patterns. Snake envenomation by region. Indian drug-brand mapping. Multilingual nurse interfaces. ABDM-ready. <strong>A global competitor takes 18 to 24 months to even start</strong> building this — and they don't have a 23-year practicing intensivist credibly leading it. We do.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03: FIVE PILLARS -->
+<section class="section section--pillars">
+  <div class="section-inner">
+    <div class="section-num reveal">03 · The Five Pillars</div>
+    <h2 class="section-title reveal">
+      What "<em>built for India</em>" actually means.
+    </h2>
+    <p class="section-lead reveal">
+      Not a marketing claim. Five concrete architectural commitments that shape every product decision.
+    </p>
+
+    <div class="pillars-list">
+
+      <div class="pillar reveal">
+        <div class="pillar-num">i</div>
+        <div class="pillar-content">
+          <h3>Tropical Disease Reasoning</h3>
+          <p>
+            Native logic for diseases Western AI has barely seen. Dengue severity prediction with platelet nadir trajectories. Scrub typhus eschar awareness. Malaria with parasite index trends. Leptospirosis early detection. Snake envenomation protocols by region — Russell's viper vs. krait vs. cobra. And coinfection patterns that aren't just two diseases stapled together — "dengue + scrub" is its own clinical entity with its own complication signature.
+          </p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Dengue</span>
+            <span class="pillar-tag">Scrub Typhus</span>
+            <span class="pillar-tag">Malaria</span>
+            <span class="pillar-tag">Leptospirosis</span>
+            <span class="pillar-tag">Snake Bite</span>
+            <span class="pillar-tag">Coinfections</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-num">ii</div>
+        <div class="pillar-content">
+          <h3>Indian Drug & Resource Reality</h3>
+          <p>
+            Indian doctors think in brand names — Magnex, Meronem, Augmentin, Tazact. ARICU recognizes both brand and generic. It knows when a drug is out of stock in your district and suggests equivalents you can actually source. ABDM/ABHA pre-population. IRDAI claim code prep built into discharge summaries. Protocol variants that follow ICMR, not just Surviving Sepsis verbatim.
+          </p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Brand–Generic Mapping</span>
+            <span class="pillar-tag">Shortage Aware</span>
+            <span class="pillar-tag">ABDM-Ready</span>
+            <span class="pillar-tag">IRDAI Claim Codes</span>
+            <span class="pillar-tag">ICMR Protocols</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-num">iii</div>
+        <div class="pillar-content">
+          <h3>Multilingual Workflow</h3>
+          <p>
+            Nurse-facing screens in 8 Indian languages: Hindi, Telugu, Tamil, Bengali, Marathi, Gujarati, Kannada, Malayalam. AI summarizes patient state in the language the family chooses. Voice input that handles code-switching — English medical terms embedded in Hindi or Telugu narrative. Family WhatsApp updates in local language. The way Indian medicine is actually practiced, not the way American software assumes it should be.
+          </p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">8 Indian Languages</span>
+            <span class="pillar-tag">Code-Switching Voice</span>
+            <span class="pillar-tag">WhatsApp Updates</span>
+            <span class="pillar-tag">Family-Facing AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-num">iv</div>
+        <div class="pillar-content">
+          <h3>Family-Centric Care</h3>
+          <p>
+            Joint family decisions are documented as joint decisions. Religious sensitivity flags built in — Jehovah's Witness transfusion preferences, orthodox community autopsy refusals. Discharge against medical advice workflows that protect doctor and patient. Financial reality acknowledged in treatment plans — when a family can't afford 3 days of meropenem, ARICU suggests the best feasible alternative, not the textbook ideal.
+          </p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Joint Family Decisions</span>
+            <span class="pillar-tag">Religious Flags</span>
+            <span class="pillar-tag">DAMA Workflows</span>
+            <span class="pillar-tag">Affordability-Aware</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-num">v</div>
+        <div class="pillar-content">
+          <h3>Tier-2 & Tier-3 Hospital Reality</h3>
+          <p>
+            Most Indian ICUs aren't Apollo or Medanta. ARICU works when not all tests are 24/7. It reasons with what's available — uses clinical proxies when CRP or procalcitonin can't be done. Mobile-first for doctors who round on phone. Affordable for small ICUs from ₹1,900 a month. It's the senior consultant your hospital can't afford full-time.
+          </p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Test-Limited Settings</span>
+            <span class="pillar-tag">Mobile-First</span>
+            <span class="pillar-tag">Affordable</span>
+            <span class="pillar-tag">Offline-Tolerant</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04: FOUNDER -->
+<section class="section section--founder">
+  <div class="section-inner">
+    <div class="section-num reveal">04 · The Founder</div>
+    <h2 class="section-title reveal">
+      Built by a <em>practicing intensivist,</em> not a tech team.
+    </h2>
+
+    <div class="founder-grid">
+      <div class="reveal">
+        <div class="founder-label">Dr. Atul Rai · M.D.</div>
+        <h3 class="founder-callout">23 years. <em>10,000+ patients.</em> Built daily, used daily.</h3>
+      </div>
+
+      <div class="reveal">
+        <p class="founder-body">
+          ARICU is built by Dr. Atul Rai, a practicing intensivist who runs his own hospital. Every alert threshold, every suggestion logic, every score interpretation has been validated against real Indian patients <strong>by a doctor who has seen tens of thousands of them.</strong>
+        </p>
+        <p class="founder-body">
+          ARICU isn't an algorithm trained somewhere far away. It's the clinical reasoning of a peer, implemented at scale — used in his own ICU before anyone else sees a new feature. That's the credibility no global competitor can buy.
+        </p>
+        <div class="founder-creds">
+          <div class="founder-cred">M.D. Medicine</div>
+          <div class="founder-cred">Critical Care</div>
+          <div class="founder-cred">Emergency Medicine</div>
+          <div class="founder-cred">Hospital Founder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05: PULL QUOTE -->
+<section class="section--quote">
+  <div class="section-inner">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">
+      ARICU is unmatched on two layers, both of which compound. <em>The AI gets smarter for your hospital, month by month.</em> And Indian clinical intelligence is the default, not a feature. The longer you use ARICU, <em>the further ahead it gets.</em>
+    </p>
+    <div class="quote-attribution">The 60-Second Answer · Founder's Pitch</div>
+  </div>
+</section>
+
+<!-- SECTION 06: CTA -->
+<section class="section section--cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Try ARICU <em>free for 7 days.</em></h2>
+    <p class="cta-sub">No credit card. No pilot framing. Just the only ICU AI built for the way Indian medicine is actually practiced. Plans start at ₹1,900/month for individual doctors.</p>
+    <div class="cta-buttons">
+      <a href="/pricing.html" class="btn btn--primary">View Pricing</a>
+      <a href="/aricu.html" class="btn btn--secondary">See the Product</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">ARICU</div>
+      <p class="footer-tagline">The only ICU intelligence built for Indian hospitals. By Dr. Atul Rai, M.D. Built daily. Used daily. Trusted clinically.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="/aricu.html">Overview</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/aricu-guide.html">User Guide</a>
+      <a href="/why-aricu.html">Why ARICU</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:atul@easymedicalsolutions.in">atul@easymedicalsolutions.in</a>
+      <a href="https://wa.me/917013211742">WhatsApp +91 70132 11742</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Easy Medical Solutions</span>
+    <span>Built in India · For India</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
