@@ -85,9 +85,48 @@ body {
   border: 1px solid var(--navy-700); font-weight: 600;
 }
 .btn-signin:hover { background: var(--navy-50); }
+/* Mobile hamburger toggle button (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 6px; width: 40px; height: 40px;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--navy-900); border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 768px) {
-  .nav-links { gap: 14px; }
-  .nav-link { display: none; }
+  .header-inner { position: relative; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: white;
+    padding: 20px 24px;
+    border-top: 1px solid var(--paper-edge);
+    border-bottom: 1px solid var(--paper-edge);
+    gap: 18px;
+    display: none;
+    box-shadow: 0 8px 24px rgba(10, 22, 40, 0.08);
+  }
+  .nav-links.open { display: flex; }
+  .nav-link {
+    display: block;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+  .btn-signin {
+    text-align: center; margin-top: 8px;
+  }
 }
 
 /* HERO */
@@ -720,6 +759,9 @@ body {
         <div class="brand-sub">by Dr. Atul Rai</div>
       </div>
     </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="nav-links">
       <a href="/why-aricu.html" class="nav-link">Why ARICU</a>
       <a href="#ai-suite" class="nav-link">AI Suite</a>
@@ -1166,5 +1208,26 @@ body {
   </div>
 </footer>
 
+<script>
+  // Mobile hamburger menu toggle
+  (function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-links');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', function() {
+      const isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    // Close menu when any nav link inside it is clicked
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
 </body>
 </html>
