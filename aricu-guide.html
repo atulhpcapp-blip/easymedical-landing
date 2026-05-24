@@ -170,6 +170,8 @@ body::after {
 .theme-doctor { --divider-primary: var(--medical-green-deep); --divider-pale: var(--medical-green-pale); }
 .theme-nurse { --divider-primary: var(--teal); --divider-pale: var(--teal-pale); }
 .theme-professor { --divider-primary: var(--purple); --divider-pale: var(--purple-pale); }
+.theme-library { --divider-primary: #B45309; --divider-pale: #FEF3C7; }
+.theme-features { --divider-primary: #475569; --divider-pale: #F1F5F9; }
 
 /* CONTENT */
 .content-page { padding: 36px 24px 26px !important; overflow-y: hidden; }
@@ -195,6 +197,20 @@ body::after {
 .theme-doctor-content { --theme-color: var(--medical-green-deep); }
 .theme-nurse-content { --theme-color: var(--teal); }
 .theme-professor-content { --theme-color: var(--purple); }
+.theme-library-content { --theme-color: #B45309; }
+.theme-features-content { --theme-color: #475569; }
+
+/* GUIDE 06 - Feature reference list (underlined feature names + evidence base) */
+.feature-list { display: flex; flex-direction: column; gap: 4px; margin: 5px 0 6px; }
+.feature-item { background: var(--paper-shade); border-radius: 4px; padding: 5px 8px; border-left: 3px solid var(--theme-color, var(--navy-700)); }
+.feature-name { font-weight: 700; font-size: 10px; color: var(--navy-900); text-decoration: underline; text-decoration-color: var(--theme-color, var(--navy-700)); text-decoration-thickness: 1.5px; text-underline-offset: 2.5px; margin-bottom: 2px; line-height: 1.2; }
+.feature-desc { font-size: 8.5px; color: var(--ink-soft); line-height: 1.35; margin-bottom: 1px; }
+.feature-evidence { font-size: 7.5px; color: var(--grey); line-height: 1.3; font-style: italic; padding-top: 1px; }
+.feature-evidence::before { content: "📚 "; font-style: normal; }
+.code-blue-hero { background: linear-gradient(135deg, rgba(211,47,47,0.10), rgba(211,47,47,0.03)); border-left: 4px solid var(--emergency); border-radius: 0 6px 6px 0; padding: 8px 11px; margin: 4px 0 8px; }
+.code-blue-hero h3 { color: var(--emergency) !important; margin-top: 0 !important; font-size: 13px !important; }
+.code-blue-hero p { font-size: 9.5px; line-height: 1.45; color: var(--ink-soft); margin-bottom: 3px !important; }
+.code-blue-hero strong { color: var(--emergency); }
 
 /* PRICING PAGE - 4 tiers */
 .pricing-page { padding: 30px 20px 22px !important; }
@@ -259,6 +275,81 @@ body::after {
 
 .stf__parent { margin: 0 auto; }
 .stf__block { background: var(--paper); }
+
+/* MOBILE FITTING - tighten everything for phones to prevent content cutoff */
+@media (max-width: 767px) {
+  /* Content pages */
+  .content-page { padding: 22px 16px 20px !important; }
+  .content-title { font-size: 18px !important; margin-bottom: 3px !important; line-height: 1.1 !important; }
+  .content-intro { font-size: 9.5px !important; margin-bottom: 8px !important; line-height: 1.35 !important; }
+  .content-eyebrow { font-size: 8px !important; margin-bottom: 4px !important; letter-spacing: 2px !important; }
+  .content-page h3 { font-size: 11px !important; margin-top: 7px !important; margin-bottom: 3px !important; }
+  .content-page h3:first-of-type { margin-top: 0 !important; }
+  .content-page p, .content-page li { font-size: 9px !important; line-height: 1.35 !important; margin-bottom: 2px !important; }
+  .content-page ol, .content-page ul { padding-left: 13px !important; margin-bottom: 3px !important; }
+
+  /* Divider pages */
+  .divider-bg { grid-template-columns: 38% 62% !important; }
+  .divider-right { padding: 22px 14px !important; }
+  .divider-title { font-size: 22px !important; margin-bottom: 6px !important; letter-spacing: -0.8px !important; }
+  .divider-subtitle { font-size: 10px !important; margin-bottom: 12px !important; line-height: 1.4 !important; }
+  .divider-eyebrow { font-size: 8px !important; margin-bottom: 6px !important; letter-spacing: 2px !important; }
+  .divider-icon { width: clamp(50px, 12vw, 80px) !important; height: clamp(50px, 12vw, 80px) !important; }
+  .divider-ecg { height: 24px !important; }
+  .divider-cta { margin-top: 8px !important; font-size: 7.5px !important; }
+
+  /* Tool list (AI tools in Doctor section) */
+  .tool-list { gap: 4px !important; margin: 4px 0 6px !important; }
+  .tool-item { padding: 5px 8px !important; }
+  .tool-name { font-size: 9.5px !important; margin-bottom: 1px !important; }
+  .tool-desc { font-size: 8.5px !important; line-height: 1.3 !important; }
+  .credit-cost { font-size: 8.5px !important; padding: 1px 4px !important; }
+
+  /* Callout */
+  .callout-important { padding: 5px 9px !important; margin: 5px 0 !important; }
+  .callout-important p { font-size: 8.5px !important; line-height: 1.35 !important; }
+
+  /* Feature list (GUIDE 06) */
+  .feature-list { gap: 3px !important; margin: 4px 0 5px !important; }
+  .feature-item { padding: 4px 7px !important; }
+  .feature-name { font-size: 9.5px !important; margin-bottom: 1px !important; text-underline-offset: 2px !important; }
+  .feature-desc { font-size: 8px !important; line-height: 1.3 !important; margin-bottom: 1px !important; }
+  .feature-evidence { font-size: 7px !important; line-height: 1.25 !important; padding-top: 0 !important; }
+
+  /* Code Blue hero */
+  .code-blue-hero { padding: 6px 9px !important; margin: 3px 0 6px !important; }
+  .code-blue-hero h3 { font-size: 11.5px !important; }
+  .code-blue-hero p { font-size: 9px !important; line-height: 1.35 !important; margin-bottom: 2px !important; }
+
+  /* TOC */
+  .toc-page { padding: 22px 18px 14px !important; }
+  .toc-entry { padding: 5px 0 !important; }
+  .toc-num { font-size: 15px !important; }
+  .toc-text strong { font-size: 11.5px !important; line-height: 1.2 !important; }
+  .toc-text span { font-size: 8.5px !important; }
+  .toc-title { font-size: 26px !important; margin-bottom: 2px !important; }
+  .toc-sub { font-size: 9.5px !important; margin-bottom: 10px !important; }
+  .toc-eyebrow { font-size: 8px !important; margin-bottom: 4px !important; }
+  .toc-page-num { font-size: 8px !important; }
+
+  /* Pricing page */
+  .pricing-page { padding: 22px 14px 18px !important; }
+  .pricing-tier { padding: 5px 8px !important; }
+  .pricing-tier-name { font-size: 9.5px !important; }
+  .pricing-tier-price { font-size: 12px !important; }
+  .pricing-tier-desc { font-size: 8px !important; }
+  .pricing-trial-title { font-size: 9.5px !important; }
+  .pricing-trial-desc { font-size: 8px !important; }
+
+  /* Install page */
+  .install-page { padding: 20px 16px 18px !important; }
+  .install-title { font-size: 18px !important; }
+  .install-sub { font-size: 9.5px !important; margin-bottom: 8px !important; }
+  .install-url { font-size: 10px !important; }
+  .install-step { padding: 6px 8px !important; }
+  .install-step-title { font-size: 9.5px !important; }
+  .install-step-desc { font-size: 8.5px !important; }
+}
 </style>
 </head>
 <body>
@@ -390,10 +481,20 @@ const PAGES_HTML = [
         <div class="toc-text"><strong>For Professors</strong><span>Cases, protocols, teaching</span></div>
         <span class="toc-page-num">p. 15</span>
       </div>
-      <div class="toc-entry" data-target="17" style="--toc-color: var(--navy-700);">
+      <div class="toc-entry" data-target="17" style="--toc-color: #B45309;">
         <span class="toc-num">05</span>
-        <div class="toc-text"><strong>Subscription Plans</strong><span>4 tiers, all AI tools, transparent pricing</span></div>
+        <div class="toc-text"><strong>Knowledge Library</strong><span>PEARLS, Protocols, Clinician Mode</span></div>
         <span class="toc-page-num">p. 18</span>
+      </div>
+      <div class="toc-entry" data-target="21" style="--toc-color: #475569;">
+        <span class="toc-num">06</span>
+        <div class="toc-text"><strong>App Features Reference</strong><span>Code Blue, modes, workspace, evidence-based</span></div>
+        <span class="toc-page-num">p. 22</span>
+      </div>
+      <div class="toc-entry" data-target="28" style="--toc-color: var(--navy-700);">
+        <span class="toc-num">07</span>
+        <div class="toc-text"><strong>Subscription Plans</strong><span>4 tiers, all AI tools, transparent pricing</span></div>
+        <span class="toc-page-num">p. 29</span>
       </div>
     </div>
    </div>
@@ -797,10 +898,321 @@ const PAGES_HTML = [
    </div>
    <div class="page-number left">17</div>`,
 
-  // 17 - PRICING (NEW 4 TIERS)
+  // 17 - KNOWLEDGE LIBRARY DIVIDER (NEW)
+  `<div class="divider-page theme-library"><div class="divider-bg">
+    <div class="divider-left"><svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+      <path d="M20,38 L50,30 L80,38 L80,76 L50,72 L20,76 Z" stroke-linejoin="round"/>
+      <line x1="50" y1="30" x2="50" y2="72"/>
+      <line x1="30" y1="45" x2="44" y2="42"/>
+      <line x1="30" y1="55" x2="44" y2="52"/>
+      <line x1="56" y1="42" x2="70" y2="45"/>
+      <line x1="56" y1="52" x2="70" y2="55"/>
+      <circle cx="50" cy="16" r="6" fill="currentColor"/>
+      <line x1="43" y1="10" x2="40" y2="6"/>
+      <line x1="57" y1="10" x2="60" y2="6"/>
+      <line x1="50" y1="5" x2="50" y2="1"/>
+    </svg></div>
+    <div class="divider-stripe"></div>
+    <div class="divider-right">
+      <div class="divider-eyebrow">— GUIDE 05</div>
+      <h2 class="divider-title">Knowledge<br/>Library</h2>
+      <p class="divider-subtitle">Clinical wisdom, codified protocols, conversational AI — your intelligence layer.</p>
+      <svg class="divider-ecg" viewBox="0 0 400 50"><path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" /></svg>
+      <div class="divider-cta">Detailed instructions follow →</div>
+    </div>
+   </div></div>
+   <div class="page-number right">18</div>`,
+
+  // 18 - PEARLS (NEW)
+  `<div class="page-mini-header left">GUIDE 05 / KNOWLEDGE LIBRARY</div>
+   <div class="page-content content-page theme-library-content">
+    <div class="content-eyebrow">— GUIDE 05 / ARICU PEARLS</div>
+    <h2 class="content-title">ARICU PEARLS</h2>
+    <p class="content-intro">Bedside wisdom from senior intensivists, auto-surfaced for the right patient at the right time.</p>
+    <h3>What it is</h3>
+    <p>A curated library of clinical pearls — short, structured nuggets of bedside wisdom that don't appear cleanly in textbooks. Each pearl carries triggers (diagnoses, drugs, alerts) so the right pearl surfaces on the right patient automatically.</p>
+    <h3>How to use it</h3>
+    <ul>
+      <li><strong>Browse:</strong> Open <strong>Pearls</strong> tab → filter by topic (Sepsis, ARDS, AKI, Hemodynamics, …) → search</li>
+      <li><strong>In patient context:</strong> Open any patient → "💡 Pearls for this patient" section shows relevant pearls automatically</li>
+      <li><strong>Submit:</strong> Click <strong>Submit Pearl</strong> → paste raw content → AI auto-structures triggers → submit for editorial review</li>
+      <li><strong>Review:</strong> Editorial team approves or returns with notes; you're credited as author</li>
+    </ul>
+    <h3>Contributor rewards</h3>
+    <div class="callout-important" style="border-left-color: var(--medical-green-deep); background: var(--medical-green-pale);">
+      <p style="color: var(--medical-green-deep) !important;">Every 10 approved pearls → 100 free ARICU credits. Recurring milestone. Your name appears on every pearl, on every relevant patient. Forever attributed.</p>
+    </div>
+   </div>
+   <div class="page-number left">19</div>`,
+
+  // 19 - PROTOCOL LIBRARY (NEW)
+  `<div class="page-mini-header right">GUIDE 05 / KNOWLEDGE LIBRARY</div>
+   <div class="page-content content-page theme-library-content">
+    <div class="content-eyebrow">— GUIDE 05 / PROTOCOL LIBRARY</div>
+    <h2 class="content-title">Protocol Library</h2>
+    <p class="content-intro">Codified step-by-step protocols — sepsis bundle, ARDS management, intubation checklist.</p>
+    <h3>What it is</h3>
+    <p>While PEARLS are tacit wisdom ("the trick I use when…"), protocols are <strong>codified procedures</strong> — explicit, step-by-step, evidence-cited. Sepsis 1-hour bundle. ARDSnet ventilation. Difficult airway algorithm. India-specific tropical-disease workflows.</p>
+    <h3>Pearls vs Protocols</h3>
+    <ul>
+      <li><strong>PEARLS:</strong> "Here's wisdom — apply with judgment." Surfaces as a suggestion.</li>
+      <li><strong>PROTOCOLS:</strong> "Here's the step. Did you do it? Time-stamped." Activated on a patient for adherence tracking.</li>
+    </ul>
+    <h3>How to use it</h3>
+    <ul>
+      <li>Open <strong>Protocols</strong> tab → browse by condition or specialty</li>
+      <li>Click any protocol → inclusion criteria, steps, references, expected outcomes</li>
+      <li>Apply to a patient → step-by-step adherence is tracked automatically</li>
+      <li>Contribute: <strong>Professor Dashboard → Submit Protocol</strong> with full references</li>
+    </ul>
+    <div class="callout-important">
+      <p>Protocols don't replace clinical judgment. They're a safety net for time-critical decisions where standardization saves lives.</p>
+    </div>
+   </div>
+   <div class="page-number right">20</div>`,
+
+  // 20 - CLINICIAN MODE (NEW)
+  `<div class="page-mini-header left">GUIDE 05 / KNOWLEDGE LIBRARY</div>
+   <div class="page-content content-page theme-library-content">
+    <div class="content-eyebrow">— GUIDE 05 / CLINICIAN MODE · COMING Q3 2026</div>
+    <h2 class="content-title">Clinician Mode</h2>
+    <p class="content-intro">Conversational AI consultation — a back-and-forth with the AI, like asking a senior colleague.</p>
+    <h3>What it is</h3>
+    <p>Today's AI Senior Consultant gives a one-shot 21-section analysis. <strong>Clinician Mode</strong> is different: open a chat-style conversation with the AI on a patient. Ask. Get a focused first response. Tap "Tell me more" on any thread to go deeper.</p>
+    <h3>The first response — three sections</h3>
+    <div class="tool-list">
+      <div class="tool-item">
+        <div class="tool-name">Immediate Management</div>
+        <div class="tool-desc">What to do in the next 60 minutes. Drugs, doses, monitoring.</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Differential</div>
+        <div class="tool-desc">Ranked possibilities with reasoning. Most likely → must-not-miss.</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Tell Me</div>
+        <div class="tool-desc">Tap any topic to go deeper. Multi-turn conversation, full context preserved.</div>
+      </div>
+    </div>
+    <h3>When to use it</h3>
+    <ul>
+      <li>Complex cases needing iterative reasoning, not one big answer</li>
+      <li>Junior doctors who want the experience of consulting a senior colleague</li>
+      <li>3 credits per conversation (covers entire multi-turn session)</li>
+    </ul>
+    <div class="callout-important" style="border-left-color: #B45309; background: rgba(180,83,9,0.08);">
+      <p style="color: #B45309 !important;">Status: In development. Beta release expected Q3 2026. Pilot doctors get early access.</p>
+    </div>
+   </div>
+   <div class="page-number left">21</div>`,
+
+  // 21 - APP FEATURES REFERENCE DIVIDER (NEW - GUIDE 06)
+  `<div class="divider-page theme-features"><div class="divider-bg">
+    <div class="divider-left"><svg class="divider-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+      <rect x="22" y="22" width="56" height="56" rx="4"/>
+      <line x1="22" y1="38" x2="78" y2="38"/>
+      <line x1="38" y1="22" x2="38" y2="78"/>
+      <circle cx="30" cy="30" r="2" fill="currentColor"/>
+      <line x1="46" y1="48" x2="70" y2="48"/>
+      <line x1="46" y1="56" x2="64" y2="56"/>
+      <line x1="46" y1="64" x2="68" y2="64"/>
+      <line x1="46" y1="72" x2="58" y2="72"/>
+    </svg></div>
+    <div class="divider-stripe"></div>
+    <div class="divider-right">
+      <div class="divider-eyebrow">— GUIDE 06</div>
+      <h2 class="divider-title">App Features<br/>Reference</h2>
+      <p class="divider-subtitle">Every tab, every mode, every patient workspace surface — explained from evidence-based sources.</p>
+      <svg class="divider-ecg" viewBox="0 0 400 50"><path d="M0,25 L80,25 L100,22 L110,28 L130,25 L160,25 L170,15 L180,8 L185,42 L195,22 L210,25 L260,25 L280,22 L290,25 L330,25 L350,15 L360,8 L365,42 L375,22 L400,25" /></svg>
+      <div class="divider-cta">Detailed instructions follow →</div>
+    </div>
+   </div></div>
+   <div class="page-number right">22</div>`,
+
+  // 22 - CODE BLUE (NEW)
+  `<div class="page-mini-header left">GUIDE 06 / EMERGENCY · CODE BLUE</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / EMERGENCY</div>
+    <h2 class="content-title">🚨 Code Blue</h2>
+    <p class="content-intro">One-tap cardiac arrest activation. Auto-logs every event for ROSC analysis and audit.</p>
+    <div class="code-blue-hero">
+      <h3>What it does</h3>
+      <p>Tap <strong>Code Blue</strong> on a patient → ARICU instantly: (1) starts a timed event log, (2) opens the resuscitation checklist (rhythm, compressions, epinephrine intervals, defibrillation), (3) notifies on-duty doctors and nurses, (4) generates a time-stamped record for post-event debrief.</p>
+      <p><strong>When:</strong> sudden cardiac arrest, witnessed loss of pulse, unresponsive with absent breathing.</p>
+    </div>
+    <h3>Why digital, not paper</h3>
+    <ul>
+      <li>Paper logs during arrest are notoriously incomplete — writing slows the team</li>
+      <li>Real-time epinephrine clock prevents over- or under-dosing (Q3-5 min)</li>
+      <li>Post-arrest data feeds quality metrics: ROSC rate, time-to-defibrillation, hands-off intervals</li>
+    </ul>
+    <div class="feature-evidence" style="margin-top: 8px; font-size: 8.5px;">📚 Panchal AR et al. <em>2020 AHA Guidelines for CPR and ECC.</em> Circulation 2020;142:S366-S468. AHA Get With The Guidelines-Resuscitation registry. NABH 5th Ed CHO emergency response standard.</div>
+   </div>
+   <div class="page-number left">23</div>`,
+
+  // 23 - WORKFLOW MODES (NEW)
+  `<div class="page-mini-header right">GUIDE 06 / WORKFLOW MODES</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / WORKFLOW</div>
+    <h2 class="content-title">Workflow Modes</h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-name">New Admission</div>
+        <div class="feature-desc">Structured patient intake — demographics, diagnosis, comorbidities, baseline vitals.</div>
+        <div class="feature-evidence">Nates JL et al. <em>Crit Care Med</em> 2016.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Round Mode</div>
+        <div class="feature-desc">Every bed at a glance: latest vitals, NEWS2, qSOFA, active alerts. Default landing view.</div>
+        <div class="feature-evidence">Pronovost P et al. <em>J Crit Care</em> 2003.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Start Round</div>
+        <div class="feature-desc">Begin a structured multidisciplinary round. The number (e.g., "12") = patients queued.</div>
+        <div class="feature-evidence">Lane D et al. <em>Med Care</em> 2013.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Morning Brief</div>
+        <div class="feature-desc">AI-generated overnight summary for handoff: new admissions, deteriorations, code events.</div>
+        <div class="feature-evidence">Starmer AJ et al. <em>I-PASS. NEJM</em> 2014.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">🎯 Triage</div>
+        <div class="feature-desc">Sort incoming patients by severity. Used when bed capacity is tight or surge volumes arrive.</div>
+        <div class="feature-evidence">WHO Emergency Triage Guidelines 2013.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Discharged</div>
+        <div class="feature-desc">Patients who have left the ICU — for follow-up and post-ICU syndrome surveillance.</div>
+        <div class="feature-evidence">Stelfox HT et al. <em>Crit Care</em> 2015.</div>
+      </div>
+    </div>
+   </div>
+   <div class="page-number right">24</div>`,
+
+  // 24 - PATIENT WORKSPACE - LIVE DATA (NEW)
+  `<div class="page-mini-header left">GUIDE 06 / PATIENT WORKSPACE</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / LIVE DATA</div>
+    <h2 class="content-title">Patient Workspace · Live Data</h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-name">Vitals</div>
+        <div class="feature-desc">HR, BP, SpO₂, RR, Temp, GCS, urine. Nurse-entered; ARICU auto-calculates scores.</div>
+        <div class="feature-evidence">Cardona-Morrell M et al. <em>Resuscitation</em> 2016.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Scores</div>
+        <div class="feature-desc">42 auto-computed scores: SOFA, qSOFA, NEWS2, APACHE-II, GCS, CURB-65, KDIGO AKI…</div>
+        <div class="feature-evidence">Vincent JL et al. <em>SOFA. Intensive Care Med</em> 1996. Singer M et al. <em>Sepsis-3. JAMA</em> 2016. RCP <em>NEWS2</em> 2017.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Red Flags</div>
+        <div class="feature-desc">Critical alerts (sepsis, ARDS, AKI, hypotension) raised by continuous evaluator. Color-coded by severity.</div>
+        <div class="feature-evidence">Evans L et al. <em>Surviving Sepsis 2021. Crit Care Med</em> 2021.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">ABG Trends</div>
+        <div class="feature-desc">Acid-base trajectory: pH, pCO₂, HCO₃, lactate, PaO₂/FiO₂. Reveals compensation + ARDS severity.</div>
+        <div class="feature-evidence">ARDS Definition Task Force. <em>Berlin Definition. JAMA</em> 2012.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Lab Trends</div>
+        <div class="feature-desc">Time-series view of creatinine, electrolytes, Hb, WBC, platelets, lactate, CRP, procalcitonin.</div>
+        <div class="feature-evidence">KDIGO. <em>Clinical Practice Guideline for AKI</em> 2012.</div>
+      </div>
+    </div>
+   </div>
+   <div class="page-number left">25</div>`,
+
+  // 25 - AI TOOLS IN PATIENT CONTEXT (NEW)
+  `<div class="page-mini-header right">GUIDE 06 / AI TOOLS</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / AI SUITE</div>
+    <h2 class="content-title">AI Tools · In Patient Context</h2>
+    <p class="content-intro">AI Suite as used on a specific patient. Decision support — your judgment remains final.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-name">AI Senior Consultant <span class="credit-cost">9 credits</span></div>
+        <div class="feature-desc">Full 21-section analysis: differential, immediate mgmt, Indian-brand drugs, dosing, monitoring, family counseling.</div>
+        <div class="feature-evidence">Sutton RT et al. <em>npj Digit Med</em> 2020.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">AI Resident <span class="credit-cost">3 credits</span></div>
+        <div class="feature-desc">Background review at 2/4/6/8/12 hr intervals. Auto-flags clinical drift before red flag triggers.</div>
+        <div class="feature-evidence">Komorowski M et al. <em>Nat Med</em> 2018.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">AI Discharge Summary <span class="credit-cost">5 credits</span></div>
+        <div class="feature-desc">Auto-generates structured summary: complaint, course, investigations, treatment, discharge meds, follow-up.</div>
+        <div class="feature-evidence">Kripalani S et al. <em>JAMA</em> 2007.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">AI Senior Consultant → Orders Import</div>
+        <div class="feature-desc">After AI Consultant runs, click "Import to Orders" — extracts drugs, doses, routes into the Doctor Orders form. You review before saving.</div>
+        <div class="feature-evidence">Bates DW et al. <em>CPOE landmark study. JAMA</em> 1998.</div>
+      </div>
+    </div>
+   </div>
+   <div class="page-number right">26</div>`,
+
+  // 26 - DOCUMENTATION & COMMUNICATION (NEW)
+  `<div class="page-mini-header left">GUIDE 06 / DOCS & COMMS</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / DOCS & COMMS</div>
+    <h2 class="content-title">Documentation & Communication</h2>
+    <p class="content-intro">Orders, notes, and how families stay informed.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-name">Doctor Orders Form</div>
+        <div class="feature-desc">Structured order entry — medication, dose, route, frequency, duration. Nurse acknowledges at bedside. NABH-compliant audit trail.</div>
+        <div class="feature-evidence">Bates DW et al. <em>CPOE landmark. JAMA</em> 1998. Koppel R et al. <em>CPOE risks. JAMA</em> 2005.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">WhatsApp Family Updates</div>
+        <div class="feature-desc">AI-generated, plain-language updates to family via WhatsApp on progress, plan changes, stable status. Local language friendly.</div>
+        <div class="feature-evidence">Davidson JE et al. <em>Family-Centered ICU Care. Crit Care Med</em> 2017. Lautrette A et al. <em>VALUE. NEJM</em> 2007.</div>
+      </div>
+    </div>
+    <div class="callout-important" style="border-left-color: var(--medical-green-deep); background: var(--medical-green-pale);">
+      <p style="color: var(--medical-green-deep) !important;">Every order, note, and family message is time-stamped with your name. Edit window: 1 hour. After that, edits create an addendum (immutable history) — NABH 5th Edition compliant.</p>
+    </div>
+   </div>
+   <div class="page-number left">27</div>`,
+
+  // 27 - ADMIN & SYSTEM TOOLS (NEW)
+  `<div class="page-mini-header right">GUIDE 06 / ADMIN & SYSTEM</div>
+   <div class="page-content content-page theme-features-content">
+    <div class="content-eyebrow">— GUIDE 06 / ADMIN TOOLS</div>
+    <h2 class="content-title">Admin & System Tools</h2>
+    <p class="content-intro">Compliance, demo, maintenance — superadmin & hospital admin only.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-name">NABH Audit Log</div>
+        <div class="feature-desc">Complete immutable record of every clinical action: who, what, when, on which patient. Required for NABH accreditation and medico-legal documentation.</div>
+        <div class="feature-evidence">NABH. <em>Accreditation Standards for Hospitals, 5th Ed.</em> India 2020.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">🔄 Reseed Demo Data</div>
+        <div class="feature-desc">Superadmin tool. Resets demo patient data for trial accounts and pitch demos. Doesn't touch live hospital data.</div>
+        <div class="feature-evidence">Internal tool. Used for safe demos without contaminating production records.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">🧪 Re-interpret ABGs</div>
+        <div class="feature-desc">Superadmin tool. Re-runs the acid-base interpretation engine across existing ABG records — useful after algorithm updates.</div>
+        <div class="feature-evidence">Stewart PA. <em>Modern quantitative acid-base chemistry. Can J Physiol Pharmacol</em> 1983.</div>
+      </div>
+    </div>
+    <div class="callout-important">
+      <p>Admin/superadmin tools are not visible to standard clinical roles. They appear only when logged in with elevated permission.</p>
+    </div>
+   </div>
+   <div class="page-number right">28</div>`,
+
+  // 28 - PRICING (NEW 4 TIERS)
   `<div class="page-mini-header right">SUBSCRIPTION PLANS / 2026</div>
    <div class="page-content pricing-page">
-    <div class="content-eyebrow" style="color: var(--navy-700);">— GUIDE 05</div>
+    <div class="content-eyebrow" style="color: var(--navy-700);">— GUIDE 07</div>
     <h2 class="content-title">Subscription Plans</h2>
     <p class="content-intro">All AI tools on every plan. ₹3/credit when you exceed your monthly allowance.</p>
 
@@ -842,9 +1254,9 @@ const PAGES_HTML = [
       Top up credit packs from 50 to 3,000 at ₹3/credit anytime.
     </p>
    </div>
-   <div class="page-number right">18</div>`,
+   <div class="page-number left">29</div>`,
 
-  // 18 - THANK YOU
+  // 29 - THANK YOU
   `<div class="thank-you-page">
     <div class="ty-eyebrow">— WELCOME TO ARICU</div>
     <h2>Built by a doctor, for doctors.</h2>
